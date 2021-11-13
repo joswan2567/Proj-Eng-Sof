@@ -1,0 +1,74 @@
+Cliente
+	ID_Cliente
+	Nome
+	CPF
+	Telefone
+	Email
+	ID_Tipo_Cliente 
+
+Tipo_Cliente
+	ID_Tipo_Cliente
+	Nome
+	Descricao
+
+Cliente-VIP
+	ID_Cliente_VIP
+	ID_Tipo_Cliente
+	ID_Vaga
+	Saldo
+
+Cartao_Cliente
+	ID_Cliente
+	ID_Cartao
+
+Cartão
+	ID_Cartao
+	Numero
+	Cod_Seg
+
+Carro_Cliente
+	Id_Carro_Cliente
+	Id_Cliente
+	Id_Carro
+
+Carro
+	ID_Carro
+	Placa
+	Modelo
+	Cor
+	
+Vaga
+	ID_Vaga
+	Numero
+	Tipo
+	Status
+
+Vaga_Cliente
+	ID_Vaga_Cliente
+	ID_Vaga
+	ID_Carro_Cliente
+	Entrada
+	Saida
+	Status
+
+Funcionario
+	ID_Funcionario
+	Nome
+	Função
+	Turno
+	Telefone
+	Email
+
+Login
+	ID_Login
+	ID_Funcionario
+	Login
+	Senha
+
+Pagamento
+	ID_Pagamento
+	ID_Vaga_Cliente
+	Data/Hora
+	Valor
+
+
