@@ -11,7 +11,7 @@ Tipo_Cliente
 	Nome
 	Descricao
 
-Cliente-VIP
+Cliente_VIP
 	ID_Cliente_VIP
 	ID_Tipo_Cliente
 	ID_Vaga
