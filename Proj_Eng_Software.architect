@@ -201,10 +201,10 @@
     <column id="COL52" populated="true" UUID="4b2c5972-ea50-4ddb-acd3-6f53d9596493" autoIncrement="false" autoIncrementSequenceName="Vaga_Cliente_status_seq" defaultValue="" name="status" nullable="0" physicalName="status" precision="8" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
-    <column id="COL53" populated="true" UUID="6803df5b-5b0e-4bbd-98a3-81a4dbf05fe5" autoIncrement="true" autoIncrementSequenceName="Vaga_Cliente_entrada_seq" defaultValue="" name="entrada" nullable="0" physicalName="entrada" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="91" userDefinedTypeUUID="ee349be3-6af2-46e1-b305-975f5354b009" >
+    <column id="COL53" populated="true" UUID="6803df5b-5b0e-4bbd-98a3-81a4dbf05fe5" autoIncrement="false" autoIncrementSequenceName="Vaga_Cliente_entrada_seq" defaultValue="" name="entrada" nullable="0" physicalName="entrada" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
      <remarks></remarks>
     </column>
-    <column id="COL54" populated="true" UUID="1d921fbc-d420-4fac-8f22-b13b47e92bdc" autoIncrement="true" autoIncrementSequenceName="Vaga_Cliente_saida_seq" defaultValue="" name="saida" nullable="0" physicalName="saida" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="91" userDefinedTypeUUID="ee349be3-6af2-46e1-b305-975f5354b009" >
+    <column id="COL54" populated="true" UUID="1d921fbc-d420-4fac-8f22-b13b47e92bdc" autoIncrement="false" autoIncrementSequenceName="Vaga_Cliente_saida_seq" defaultValue="" name="saida" nullable="0" physicalName="saida" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
      <remarks></remarks>
     </column>
     </folder>
@@ -227,10 +227,10 @@
     <column id="COL59" populated="true" UUID="dfc353d0-1b22-459b-922c-78e60291fd2c" autoIncrement="false" autoIncrementSequenceName="Vaga_Cliente_id_vaga_cliente_seq" defaultValue="" name="id_vaga_cliente" nullable="0" physicalName="id_vaga_cliente" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
      <remarks></remarks>
     </column>
-    <column id="COL60" populated="true" UUID="24db74a1-1fd3-4751-b2a2-ae253bec97c3" autoIncrement="false" autoIncrementSequenceName="Pagamento_data_seq" defaultValue="" name="data" nullable="0" physicalName="data" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="91" userDefinedTypeUUID="ee349be3-6af2-46e1-b305-975f5354b009" >
+    <column id="COL60" populated="true" UUID="24db74a1-1fd3-4751-b2a2-ae253bec97c3" autoIncrement="false" autoIncrementSequenceName="Pagamento_data_seq" defaultValue="" name="data" nullable="0" physicalName="data" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
      <remarks></remarks>
     </column>
-    <column id="COL61" populated="true" UUID="ce9bedd1-3046-46c6-8d60-556b8f036d4b" autoIncrement="false" autoIncrementSequenceName="Pagamento_hora_seq" defaultValue="" name="hora" nullable="0" physicalName="hora" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="92" userDefinedTypeUUID="10d6960f-169d-47c2-860a-37341342b1d5" >
+    <column id="COL61" populated="true" UUID="ce9bedd1-3046-46c6-8d60-556b8f036d4b" autoIncrement="false" autoIncrementSequenceName="Pagamento_hora_seq" defaultValue="" name="hora" nullable="0" physicalName="hora" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
      <remarks></remarks>
     </column>
     <column id="COL62" populated="true" UUID="e667d547-501a-4d7f-adf6-7f3d4adee62b" autoIncrement="false" autoIncrementSequenceName="Pagamento_valor_seq" defaultValue="" name="valor" nullable="0" physicalName="valor" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="6" userDefinedTypeUUID="7e55bcd0-7606-4153-b749-9c397f12c4d8" >

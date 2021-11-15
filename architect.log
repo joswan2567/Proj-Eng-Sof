@@ -272,3 +272,1429 @@
 234994 [AWT-EventQueue-0] WARN  ca.sqlpower.sqlobject.ForeignKeyColumnUpdaterPoolingSPListener  - Warning: unknown SQLTypePhysicalProperties property name changed while monitoring pkTable
 241108 [AWT-EventQueue-0] WARN  ca.sqlpower.sqlobject.ForeignKeyColumnUpdaterPoolingSPListener  - Warning: unknown UserDefinedSQLType property myAutoIncrement changed while monitoring pkTable
 260986 [AWT-EventQueue-0] WARN  ca.sqlpower.sqlobject.ForeignKeyColumnUpdaterPoolingSPListener  - Warning: unknown SQLTypePhysicalProperties property name changed while monitoring pkTable
+0    [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ArchitectUtils  - Log4J configured successfully
+1861 [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Beginning to read/merge new pl.ini data
+1964 [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Finished reading file.
+1964 [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Beginning to read/merge new pl.ini data
+2046 [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Finished reading file.
+6928 [Thread-5] ERROR ca.sqlpower.architect.swingui.action.CheckForUpdateAction  - Fail to retrieve current version number!
+119711 [AWT-EventQueue-0] WARN  ca.sqlpower.sqlobject.ForeignKeyColumnUpdaterPoolingSPListener  - Warning: unknown SQLTypePhysicalProperties property name changed while monitoring pkTable
+119713 [AWT-EventQueue-0] WARN  ca.sqlpower.sqlobject.ForeignKeyColumnUpdaterPoolingSPListener  - Warning: unknown column property autoIncrementSequenceName changed while monitoring pkTable
+148490 [AWT-EventQueue-0] WARN  ca.sqlpower.sqlobject.ForeignKeyColumnUpdaterPoolingSPListener  - Warning: unknown SQLTypePhysicalProperties property name changed while monitoring pkTable
+148491 [AWT-EventQueue-0] WARN  ca.sqlpower.sqlobject.ForeignKeyColumnUpdaterPoolingSPListener  - Warning: unknown column property autoIncrementSequenceName changed while monitoring pkTable
+165105 [AWT-EventQueue-0] WARN  ca.sqlpower.sqlobject.ForeignKeyColumnUpdaterPoolingSPListener  - Warning: unknown SQLTypePhysicalProperties property name changed while monitoring pkTable
+165107 [AWT-EventQueue-0] WARN  ca.sqlpower.sqlobject.ForeignKeyColumnUpdaterPoolingSPListener  - Warning: unknown column property autoIncrementSequenceName changed while monitoring pkTable
+165107 [AWT-EventQueue-0] WARN  ca.sqlpower.sqlobject.ForeignKeyColumnUpdaterPoolingSPListener  - Warning: unknown SQLTypePhysicalProperties property name changed while monitoring pkTable
+165109 [AWT-EventQueue-0] WARN  ca.sqlpower.sqlobject.ForeignKeyColumnUpdaterPoolingSPListener  - Warning: unknown column property autoIncrementSequenceName changed while monitoring pkTable
+168370 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+CREATE SEQUENCE public.id_funcionario_seq
+168380 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Funcionario (
+                id_funcionario BIGINT NOT NULL DEFAULT nextval('public.id_funcionario_seq'),
+                nome VARCHAR(51) NOT NULL,
+                funcao VARCHAR(20) NOT NULL,
+                turno VARCHAR(5) NOT NULL,
+                telefone INTEGER NOT NULL,
+                email VARCHAR(50) NOT NULL,
+                CONSTRAINT funcionario_pk PRIMARY KEY (id_funcionario)
+)
+168381 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.id_funcionario_seq OWNED BY public.Funcionario.id_funcionario
+168381 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.login_id_login_seq
+168382 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Login (
+                id_login BIGINT NOT NULL DEFAULT nextval('public.login_id_login_seq'),
+                id_funcionario BIGINT NOT NULL,
+                login VARCHAR(12) NOT NULL,
+                senha VARCHAR(12) NOT NULL,
+                CONSTRAINT login_pk PRIMARY KEY (id_login)
+)
+168383 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.login_id_login_seq OWNED BY public.Login.id_login
+168383 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.vaga_id_vaga_seq
+168384 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Vaga (
+                id_vaga BIGINT NOT NULL DEFAULT nextval('public.vaga_id_vaga_seq'),
+                numero INTEGER NOT NULL,
+                tipo CHAR(10) NOT NULL,
+                status VARCHAR(8) NOT NULL,
+                CONSTRAINT vaga_pk PRIMARY KEY (id_vaga)
+)
+168384 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.vaga_id_vaga_seq OWNED BY public.Vaga.id_vaga
+168385 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.carro_id_carro_seq
+168385 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Carro (
+                id_carro BIGINT NOT NULL DEFAULT nextval('public.carro_id_carro_seq'),
+                placa VARCHAR(7) NOT NULL,
+                cor VARCHAR(10) NOT NULL,
+                modelo VARCHAR(20) NOT NULL,
+                CONSTRAINT carro_pk PRIMARY KEY (id_carro)
+)
+168386 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.carro_id_carro_seq OWNED BY public.Carro.id_carro
+168386 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.cartao_id_cartao_seq
+168387 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Cartao (
+                id_cartao BIGINT NOT NULL DEFAULT nextval('public.cartao_id_cartao_seq'),
+                numero VARCHAR(15) NOT NULL,
+                cod_seg BIGINT NOT NULL,
+                CONSTRAINT cartao_pk PRIMARY KEY (id_cartao)
+)
+168388 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.cartao_id_cartao_seq OWNED BY public.Cartao.id_cartao
+168388 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.id_tipo_cliente_seq_1
+168389 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Tipo_Cliente (
+                id_tipo_cliente BIGINT NOT NULL DEFAULT nextval('public.id_tipo_cliente_seq_1'),
+                nome VARCHAR(50) NOT NULL,
+                descricao TEXT(100) NOT NULL,
+                CONSTRAINT tipo_cliente_pk PRIMARY KEY (id_tipo_cliente)
+)
+168390 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.id_tipo_cliente_seq_1 OWNED BY public.Tipo_Cliente.id_tipo_cliente
+168390 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.cliente_vip_id_cliente_vip_seq
+168391 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Cliente_Vip (
+                id_cliente_vip BIGINT NOT NULL DEFAULT nextval('public.cliente_vip_id_cliente_vip_seq'),
+                id_tipo_cliente BIGINT NOT NULL,
+                saldo REAL NOT NULL,
+                CONSTRAINT cliente_vip_pk PRIMARY KEY (id_cliente_vip)
+)
+168392 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.cliente_vip_id_cliente_vip_seq OWNED BY public.Cliente_Vip.id_cliente_vip
+168393 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.cliente_id_cliente_seq
+168393 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Cliente (
+                id_cliente BIGINT NOT NULL DEFAULT nextval('public.cliente_id_cliente_seq'),
+                id_tipo_cliente BIGINT NOT NULL,
+                nome VARCHAR(50) NOT NULL,
+                cpf VARCHAR(11) NOT NULL,
+                telefone VARCHAR(11),
+                email VARCHAR(50) NOT NULL,
+                CONSTRAINT cliente_pk PRIMARY KEY (id_cliente)
+)
+168394 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.cliente_id_cliente_seq OWNED BY public.Cliente.id_cliente
+168394 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.carro_cliente_id_carro_cliente_seq
+168395 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Carro_Cliente (
+                id_carro_cliente BIGINT NOT NULL DEFAULT nextval('public.carro_cliente_id_carro_cliente_seq'),
+                id_cliente BIGINT NOT NULL,
+                id_carro BIGINT NOT NULL,
+                CONSTRAINT carro_cliente_pk PRIMARY KEY (id_carro_cliente)
+)
+168395 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.carro_cliente_id_carro_cliente_seq OWNED BY public.Carro_Cliente.id_carro_cliente
+168396 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.id_vaga_cliente_seq
+168396 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.vaga_cliente_entrada_seq
+168397 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.vaga_cliente_saida_seq
+168398 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Vaga_Cliente (
+                id_vaga_cliente BIGINT NOT NULL DEFAULT nextval('public.id_vaga_cliente_seq'),
+                id_carro_cliente BIGINT NOT NULL,
+                id_vaga BIGINT NOT NULL,
+                status VARCHAR(8) NOT NULL,
+                entrada DATE NOT NULL DEFAULT nextval('public.vaga_cliente_entrada_seq'),
+                saida DATE NOT NULL DEFAULT nextval('public.vaga_cliente_saida_seq'),
+                CONSTRAINT vaga_cliente_pk PRIMARY KEY (id_vaga_cliente)
+)
+168398 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.id_vaga_cliente_seq OWNED BY public.Vaga_Cliente.id_vaga_cliente
+168399 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER SEQUENCE public.vaga_cliente_entrada_seq OWNED BY public.Vaga_Cliente.entrada
+168399 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER SEQUENCE public.vaga_cliente_saida_seq OWNED BY public.Vaga_Cliente.saida
+168400 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.pagamento_id_pagamento_seq
+168400 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Pagamento (
+                id_pagamento BIGINT NOT NULL DEFAULT nextval('public.pagamento_id_pagamento_seq'),
+                id_vaga_cliente BIGINT NOT NULL,
+                data DATE NOT NULL,
+                hora TIME NOT NULL,
+                valor REAL NOT NULL,
+                CONSTRAINT id_pagamento PRIMARY KEY (id_pagamento)
+)
+168401 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.pagamento_id_pagamento_seq OWNED BY public.Pagamento.id_pagamento
+168402 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.cartao_cliente_id_cartao_cliente_seq
+168402 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Cartao_Cliente (
+                id_cartao_cliente BIGINT NOT NULL DEFAULT nextval('public.cartao_cliente_id_cartao_cliente_seq'),
+                id_cartao BIGINT NOT NULL,
+                id_cliente BIGINT NOT NULL,
+                CONSTRAINT cartao_cliente_pk PRIMARY KEY (id_cartao_cliente)
+)
+168403 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.cartao_cliente_id_cartao_cliente_seq OWNED BY public.Cartao_Cliente.id_cartao_cliente
+168404 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Login ADD CONSTRAINT funcionario_login_fk
+FOREIGN KEY (id_funcionario)
+REFERENCES public.Funcionario (id_funcionario)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+168405 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Vaga_Cliente ADD CONSTRAINT vaga_vaga_cliente_fk
+FOREIGN KEY (id_vaga)
+REFERENCES public.Vaga (id_vaga)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+168406 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Carro_Cliente ADD CONSTRAINT carro_carro_cliente_fk
+FOREIGN KEY (id_carro)
+REFERENCES public.Carro (id_carro)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+168408 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Cartao_Cliente ADD CONSTRAINT cartao_cartao_cliente_fk
+FOREIGN KEY (id_cartao)
+REFERENCES public.Cartao (id_cartao)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+168408 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Cliente ADD CONSTRAINT tipo_cliente_cliente_fk
+FOREIGN KEY (id_tipo_cliente)
+REFERENCES public.Tipo_Cliente (id_tipo_cliente)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+168409 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Cliente_Vip ADD CONSTRAINT tipo_cliente_cliente_vip_fk
+FOREIGN KEY (id_tipo_cliente)
+REFERENCES public.Tipo_Cliente (id_tipo_cliente)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+168411 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Cartao_Cliente ADD CONSTRAINT cliente_cartao_cliente_fk
+FOREIGN KEY (id_cliente)
+REFERENCES public.Cliente (id_cliente)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+168413 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Carro_Cliente ADD CONSTRAINT cliente_carro_cliente_fk
+FOREIGN KEY (id_cliente)
+REFERENCES public.Cliente (id_cliente)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+168414 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Vaga_Cliente ADD CONSTRAINT carro_cliente_vaga_cliente_fk
+FOREIGN KEY (id_carro_cliente)
+REFERENCES public.Carro_Cliente (id_carro_cliente)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+168415 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Pagamento ADD CONSTRAINT vaga_cliente_pagamento_fk
+FOREIGN KEY (id_vaga_cliente)
+REFERENCES public.Vaga_Cliente (id_vaga_cliente)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+168437 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - The list size is :50
+0    [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ArchitectUtils  - Log4J configured successfully
+1468 [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Beginning to read/merge new pl.ini data
+1600 [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Finished reading file.
+1601 [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Beginning to read/merge new pl.ini data
+1713 [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Finished reading file.
+5122 [Thread-5] ERROR ca.sqlpower.architect.swingui.action.CheckForUpdateAction  - Fail to retrieve current version number!
+12923 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+CREATE SEQUENCE public.id_funcionario_seq
+12929 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Funcionario (
+                id_funcionario BIGINT NOT NULL DEFAULT nextval('public.id_funcionario_seq'),
+                nome VARCHAR(51) NOT NULL,
+                funcao VARCHAR(20) NOT NULL,
+                turno VARCHAR(5) NOT NULL,
+                telefone INTEGER NOT NULL,
+                email VARCHAR(50) NOT NULL,
+                CONSTRAINT funcionario_pk PRIMARY KEY (id_funcionario)
+)
+12929 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.id_funcionario_seq OWNED BY public.Funcionario.id_funcionario
+12930 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.login_id_login_seq
+12931 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Login (
+                id_login BIGINT NOT NULL DEFAULT nextval('public.login_id_login_seq'),
+                id_funcionario BIGINT NOT NULL,
+                login VARCHAR(12) NOT NULL,
+                senha VARCHAR(12) NOT NULL,
+                CONSTRAINT login_pk PRIMARY KEY (id_login)
+)
+12931 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.login_id_login_seq OWNED BY public.Login.id_login
+12932 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.vaga_id_vaga_seq
+12932 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Vaga (
+                id_vaga BIGINT NOT NULL DEFAULT nextval('public.vaga_id_vaga_seq'),
+                numero INTEGER NOT NULL,
+                tipo CHAR(10) NOT NULL,
+                status VARCHAR(8) NOT NULL,
+                CONSTRAINT vaga_pk PRIMARY KEY (id_vaga)
+)
+12933 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.vaga_id_vaga_seq OWNED BY public.Vaga.id_vaga
+12933 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.carro_id_carro_seq
+12934 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Carro (
+                id_carro BIGINT NOT NULL DEFAULT nextval('public.carro_id_carro_seq'),
+                placa VARCHAR(7) NOT NULL,
+                cor VARCHAR(10) NOT NULL,
+                modelo VARCHAR(20) NOT NULL,
+                CONSTRAINT carro_pk PRIMARY KEY (id_carro)
+)
+12935 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.carro_id_carro_seq OWNED BY public.Carro.id_carro
+12935 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.cartao_id_cartao_seq
+12936 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Cartao (
+                id_cartao BIGINT NOT NULL DEFAULT nextval('public.cartao_id_cartao_seq'),
+                numero VARCHAR(15) NOT NULL,
+                cod_seg BIGINT NOT NULL,
+                CONSTRAINT cartao_pk PRIMARY KEY (id_cartao)
+)
+12936 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.cartao_id_cartao_seq OWNED BY public.Cartao.id_cartao
+12937 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.id_tipo_cliente_seq_1
+12937 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Tipo_Cliente (
+                id_tipo_cliente BIGINT NOT NULL DEFAULT nextval('public.id_tipo_cliente_seq_1'),
+                nome VARCHAR(50) NOT NULL,
+                descricao TEXT(100) NOT NULL,
+                CONSTRAINT tipo_cliente_pk PRIMARY KEY (id_tipo_cliente)
+)
+12938 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.id_tipo_cliente_seq_1 OWNED BY public.Tipo_Cliente.id_tipo_cliente
+12938 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.cliente_vip_id_cliente_vip_seq
+12939 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Cliente_Vip (
+                id_cliente_vip BIGINT NOT NULL DEFAULT nextval('public.cliente_vip_id_cliente_vip_seq'),
+                id_tipo_cliente BIGINT NOT NULL,
+                saldo REAL NOT NULL,
+                CONSTRAINT cliente_vip_pk PRIMARY KEY (id_cliente_vip)
+)
+12940 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.cliente_vip_id_cliente_vip_seq OWNED BY public.Cliente_Vip.id_cliente_vip
+12940 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.cliente_id_cliente_seq
+12941 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Cliente (
+                id_cliente BIGINT NOT NULL DEFAULT nextval('public.cliente_id_cliente_seq'),
+                id_tipo_cliente BIGINT NOT NULL,
+                nome VARCHAR(50) NOT NULL,
+                cpf VARCHAR(11) NOT NULL,
+                telefone VARCHAR(11),
+                email VARCHAR(50) NOT NULL,
+                CONSTRAINT cliente_pk PRIMARY KEY (id_cliente)
+)
+12941 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.cliente_id_cliente_seq OWNED BY public.Cliente.id_cliente
+12942 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.carro_cliente_id_carro_cliente_seq
+12942 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Carro_Cliente (
+                id_carro_cliente BIGINT NOT NULL DEFAULT nextval('public.carro_cliente_id_carro_cliente_seq'),
+                id_cliente BIGINT NOT NULL,
+                id_carro BIGINT NOT NULL,
+                CONSTRAINT carro_cliente_pk PRIMARY KEY (id_carro_cliente)
+)
+12943 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.carro_cliente_id_carro_cliente_seq OWNED BY public.Carro_Cliente.id_carro_cliente
+12943 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.id_vaga_cliente_seq
+12944 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.vaga_cliente_entrada_seq
+12944 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.vaga_cliente_saida_seq
+12945 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Vaga_Cliente (
+                id_vaga_cliente BIGINT NOT NULL DEFAULT nextval('public.id_vaga_cliente_seq'),
+                id_carro_cliente BIGINT NOT NULL,
+                id_vaga BIGINT NOT NULL,
+                status VARCHAR(8) NOT NULL,
+                entrada DATE NOT NULL DEFAULT nextval('public.vaga_cliente_entrada_seq'),
+                saida DATE NOT NULL DEFAULT nextval('public.vaga_cliente_saida_seq'),
+                CONSTRAINT vaga_cliente_pk PRIMARY KEY (id_vaga_cliente)
+)
+12945 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.id_vaga_cliente_seq OWNED BY public.Vaga_Cliente.id_vaga_cliente
+12946 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER SEQUENCE public.vaga_cliente_entrada_seq OWNED BY public.Vaga_Cliente.entrada
+12946 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER SEQUENCE public.vaga_cliente_saida_seq OWNED BY public.Vaga_Cliente.saida
+12946 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.pagamento_id_pagamento_seq
+12947 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Pagamento (
+                id_pagamento BIGINT NOT NULL DEFAULT nextval('public.pagamento_id_pagamento_seq'),
+                id_vaga_cliente BIGINT NOT NULL,
+                data DATE NOT NULL,
+                hora TIME NOT NULL,
+                valor REAL NOT NULL,
+                CONSTRAINT id_pagamento PRIMARY KEY (id_pagamento)
+)
+12947 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.pagamento_id_pagamento_seq OWNED BY public.Pagamento.id_pagamento
+12948 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.cartao_cliente_id_cartao_cliente_seq
+12948 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Cartao_Cliente (
+                id_cartao_cliente BIGINT NOT NULL DEFAULT nextval('public.cartao_cliente_id_cartao_cliente_seq'),
+                id_cartao BIGINT NOT NULL,
+                id_cliente BIGINT NOT NULL,
+                CONSTRAINT cartao_cliente_pk PRIMARY KEY (id_cartao_cliente)
+)
+12949 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.cartao_cliente_id_cartao_cliente_seq OWNED BY public.Cartao_Cliente.id_cartao_cliente
+12953 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Login ADD CONSTRAINT funcionario_login_fk
+FOREIGN KEY (id_funcionario)
+REFERENCES public.Funcionario (id_funcionario)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+12955 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Vaga_Cliente ADD CONSTRAINT vaga_vaga_cliente_fk
+FOREIGN KEY (id_vaga)
+REFERENCES public.Vaga (id_vaga)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+12957 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Carro_Cliente ADD CONSTRAINT carro_carro_cliente_fk
+FOREIGN KEY (id_carro)
+REFERENCES public.Carro (id_carro)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+12959 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Cartao_Cliente ADD CONSTRAINT cartao_cartao_cliente_fk
+FOREIGN KEY (id_cartao)
+REFERENCES public.Cartao (id_cartao)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+12961 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Cliente ADD CONSTRAINT tipo_cliente_cliente_fk
+FOREIGN KEY (id_tipo_cliente)
+REFERENCES public.Tipo_Cliente (id_tipo_cliente)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+12962 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Cliente_Vip ADD CONSTRAINT tipo_cliente_cliente_vip_fk
+FOREIGN KEY (id_tipo_cliente)
+REFERENCES public.Tipo_Cliente (id_tipo_cliente)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+12963 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Cartao_Cliente ADD CONSTRAINT cliente_cartao_cliente_fk
+FOREIGN KEY (id_cliente)
+REFERENCES public.Cliente (id_cliente)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+12965 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Carro_Cliente ADD CONSTRAINT cliente_carro_cliente_fk
+FOREIGN KEY (id_cliente)
+REFERENCES public.Cliente (id_cliente)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+12967 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Vaga_Cliente ADD CONSTRAINT carro_cliente_vaga_cliente_fk
+FOREIGN KEY (id_carro_cliente)
+REFERENCES public.Carro_Cliente (id_carro_cliente)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+12968 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Pagamento ADD CONSTRAINT vaga_cliente_pagamento_fk
+FOREIGN KEY (id_vaga_cliente)
+REFERENCES public.Vaga_Cliente (id_vaga_cliente)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+12974 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - The list size is :50
+260613 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+CREATE SEQUENCE public.id_funcionario_seq
+260613 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Funcionario (
+                id_funcionario BIGINT NOT NULL DEFAULT nextval('public.id_funcionario_seq'),
+                nome VARCHAR(51) NOT NULL,
+                funcao VARCHAR(20) NOT NULL,
+                turno VARCHAR(5) NOT NULL,
+                telefone INTEGER NOT NULL,
+                email VARCHAR(50) NOT NULL,
+                CONSTRAINT funcionario_pk PRIMARY KEY (id_funcionario)
+)
+260614 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.id_funcionario_seq OWNED BY public.Funcionario.id_funcionario
+260614 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.login_id_login_seq
+260615 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Login (
+                id_login BIGINT NOT NULL DEFAULT nextval('public.login_id_login_seq'),
+                id_funcionario BIGINT NOT NULL,
+                login VARCHAR(12) NOT NULL,
+                senha VARCHAR(12) NOT NULL,
+                CONSTRAINT login_pk PRIMARY KEY (id_login)
+)
+260615 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.login_id_login_seq OWNED BY public.Login.id_login
+260616 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.vaga_id_vaga_seq
+260617 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Vaga (
+                id_vaga BIGINT NOT NULL DEFAULT nextval('public.vaga_id_vaga_seq'),
+                numero INTEGER NOT NULL,
+                tipo CHAR(10) NOT NULL,
+                status VARCHAR(8) NOT NULL,
+                CONSTRAINT vaga_pk PRIMARY KEY (id_vaga)
+)
+260617 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.vaga_id_vaga_seq OWNED BY public.Vaga.id_vaga
+260618 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.carro_id_carro_seq
+260618 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Carro (
+                id_carro BIGINT NOT NULL DEFAULT nextval('public.carro_id_carro_seq'),
+                placa VARCHAR(7) NOT NULL,
+                cor VARCHAR(10) NOT NULL,
+                modelo VARCHAR(20) NOT NULL,
+                CONSTRAINT carro_pk PRIMARY KEY (id_carro)
+)
+260619 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.carro_id_carro_seq OWNED BY public.Carro.id_carro
+260619 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.cartao_id_cartao_seq
+260620 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Cartao (
+                id_cartao BIGINT NOT NULL DEFAULT nextval('public.cartao_id_cartao_seq'),
+                numero VARCHAR(15) NOT NULL,
+                cod_seg BIGINT NOT NULL,
+                CONSTRAINT cartao_pk PRIMARY KEY (id_cartao)
+)
+260620 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.cartao_id_cartao_seq OWNED BY public.Cartao.id_cartao
+260621 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.id_tipo_cliente_seq_1
+260621 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Tipo_Cliente (
+                id_tipo_cliente BIGINT NOT NULL DEFAULT nextval('public.id_tipo_cliente_seq_1'),
+                nome VARCHAR(50) NOT NULL,
+                descricao TEXT(100) NOT NULL,
+                CONSTRAINT tipo_cliente_pk PRIMARY KEY (id_tipo_cliente)
+)
+260622 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.id_tipo_cliente_seq_1 OWNED BY public.Tipo_Cliente.id_tipo_cliente
+260622 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.cliente_vip_id_cliente_vip_seq
+260623 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Cliente_Vip (
+                id_cliente_vip BIGINT NOT NULL DEFAULT nextval('public.cliente_vip_id_cliente_vip_seq'),
+                id_tipo_cliente BIGINT NOT NULL,
+                saldo REAL NOT NULL,
+                CONSTRAINT cliente_vip_pk PRIMARY KEY (id_cliente_vip)
+)
+260623 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.cliente_vip_id_cliente_vip_seq OWNED BY public.Cliente_Vip.id_cliente_vip
+260623 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.cliente_id_cliente_seq
+260624 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Cliente (
+                id_cliente BIGINT NOT NULL DEFAULT nextval('public.cliente_id_cliente_seq'),
+                id_tipo_cliente BIGINT NOT NULL,
+                nome VARCHAR(50) NOT NULL,
+                cpf VARCHAR(11) NOT NULL,
+                telefone VARCHAR(11),
+                email VARCHAR(50) NOT NULL,
+                CONSTRAINT cliente_pk PRIMARY KEY (id_cliente)
+)
+260625 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.cliente_id_cliente_seq OWNED BY public.Cliente.id_cliente
+260625 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.carro_cliente_id_carro_cliente_seq
+260626 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Carro_Cliente (
+                id_carro_cliente BIGINT NOT NULL DEFAULT nextval('public.carro_cliente_id_carro_cliente_seq'),
+                id_cliente BIGINT NOT NULL,
+                id_carro BIGINT NOT NULL,
+                CONSTRAINT carro_cliente_pk PRIMARY KEY (id_carro_cliente)
+)
+260626 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.carro_cliente_id_carro_cliente_seq OWNED BY public.Carro_Cliente.id_carro_cliente
+260626 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.id_vaga_cliente_seq
+260627 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.vaga_cliente_entrada_seq
+260627 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.vaga_cliente_saida_seq
+260628 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Vaga_Cliente (
+                id_vaga_cliente BIGINT NOT NULL DEFAULT nextval('public.id_vaga_cliente_seq'),
+                id_carro_cliente BIGINT NOT NULL,
+                id_vaga BIGINT NOT NULL,
+                status VARCHAR(8) NOT NULL,
+                entrada DATE NOT NULL DEFAULT nextval('public.vaga_cliente_entrada_seq'),
+                saida DATE NOT NULL DEFAULT nextval('public.vaga_cliente_saida_seq'),
+                CONSTRAINT vaga_cliente_pk PRIMARY KEY (id_vaga_cliente)
+)
+260628 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.id_vaga_cliente_seq OWNED BY public.Vaga_Cliente.id_vaga_cliente
+260629 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER SEQUENCE public.vaga_cliente_entrada_seq OWNED BY public.Vaga_Cliente.entrada
+260629 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER SEQUENCE public.vaga_cliente_saida_seq OWNED BY public.Vaga_Cliente.saida
+260630 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.pagamento_id_pagamento_seq
+260630 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Pagamento (
+                id_pagamento BIGINT NOT NULL DEFAULT nextval('public.pagamento_id_pagamento_seq'),
+                id_vaga_cliente BIGINT NOT NULL,
+                data DATE NOT NULL,
+                hora TIME NOT NULL,
+                valor REAL NOT NULL,
+                CONSTRAINT id_pagamento PRIMARY KEY (id_pagamento)
+)
+260631 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.pagamento_id_pagamento_seq OWNED BY public.Pagamento.id_pagamento
+260631 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.cartao_cliente_id_cartao_cliente_seq
+260632 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Cartao_Cliente (
+                id_cartao_cliente BIGINT NOT NULL DEFAULT nextval('public.cartao_cliente_id_cartao_cliente_seq'),
+                id_cartao BIGINT NOT NULL,
+                id_cliente BIGINT NOT NULL,
+                CONSTRAINT cartao_cliente_pk PRIMARY KEY (id_cartao_cliente)
+)
+260632 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.cartao_cliente_id_cartao_cliente_seq OWNED BY public.Cartao_Cliente.id_cartao_cliente
+260633 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Login ADD CONSTRAINT funcionario_login_fk
+FOREIGN KEY (id_funcionario)
+REFERENCES public.Funcionario (id_funcionario)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+260633 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Vaga_Cliente ADD CONSTRAINT vaga_vaga_cliente_fk
+FOREIGN KEY (id_vaga)
+REFERENCES public.Vaga (id_vaga)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+260634 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Carro_Cliente ADD CONSTRAINT carro_carro_cliente_fk
+FOREIGN KEY (id_carro)
+REFERENCES public.Carro (id_carro)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+260634 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Cartao_Cliente ADD CONSTRAINT cartao_cartao_cliente_fk
+FOREIGN KEY (id_cartao)
+REFERENCES public.Cartao (id_cartao)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+260635 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Cliente ADD CONSTRAINT tipo_cliente_cliente_fk
+FOREIGN KEY (id_tipo_cliente)
+REFERENCES public.Tipo_Cliente (id_tipo_cliente)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+260635 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Cliente_Vip ADD CONSTRAINT tipo_cliente_cliente_vip_fk
+FOREIGN KEY (id_tipo_cliente)
+REFERENCES public.Tipo_Cliente (id_tipo_cliente)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+260639 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Cartao_Cliente ADD CONSTRAINT cliente_cartao_cliente_fk
+FOREIGN KEY (id_cliente)
+REFERENCES public.Cliente (id_cliente)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+260639 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Carro_Cliente ADD CONSTRAINT cliente_carro_cliente_fk
+FOREIGN KEY (id_cliente)
+REFERENCES public.Cliente (id_cliente)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+260640 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Vaga_Cliente ADD CONSTRAINT carro_cliente_vaga_cliente_fk
+FOREIGN KEY (id_carro_cliente)
+REFERENCES public.Carro_Cliente (id_carro_cliente)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+260641 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Pagamento ADD CONSTRAINT vaga_cliente_pagamento_fk
+FOREIGN KEY (id_vaga_cliente)
+REFERENCES public.Vaga_Cliente (id_vaga_cliente)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+260641 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - The list size is :50
+506335 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+CREATE SEQUENCE public.id_funcionario_seq
+506336 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Funcionario (
+                id_funcionario BIGINT NOT NULL DEFAULT nextval('public.id_funcionario_seq'),
+                nome VARCHAR(51) NOT NULL,
+                funcao VARCHAR(20) NOT NULL,
+                turno VARCHAR(5) NOT NULL,
+                telefone INTEGER NOT NULL,
+                email VARCHAR(50) NOT NULL,
+                CONSTRAINT funcionario_pk PRIMARY KEY (id_funcionario)
+)
+506336 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.id_funcionario_seq OWNED BY public.Funcionario.id_funcionario
+506337 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.login_id_login_seq
+506338 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Login (
+                id_login BIGINT NOT NULL DEFAULT nextval('public.login_id_login_seq'),
+                id_funcionario BIGINT NOT NULL,
+                login VARCHAR(12) NOT NULL,
+                senha VARCHAR(12) NOT NULL,
+                CONSTRAINT login_pk PRIMARY KEY (id_login)
+)
+506338 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.login_id_login_seq OWNED BY public.Login.id_login
+506339 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.vaga_id_vaga_seq
+506339 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Vaga (
+                id_vaga BIGINT NOT NULL DEFAULT nextval('public.vaga_id_vaga_seq'),
+                numero INTEGER NOT NULL,
+                tipo CHAR(10) NOT NULL,
+                status VARCHAR(8) NOT NULL,
+                CONSTRAINT vaga_pk PRIMARY KEY (id_vaga)
+)
+506340 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.vaga_id_vaga_seq OWNED BY public.Vaga.id_vaga
+506340 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.carro_id_carro_seq
+506341 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Carro (
+                id_carro BIGINT NOT NULL DEFAULT nextval('public.carro_id_carro_seq'),
+                placa VARCHAR(7) NOT NULL,
+                cor VARCHAR(10) NOT NULL,
+                modelo VARCHAR(20) NOT NULL,
+                CONSTRAINT carro_pk PRIMARY KEY (id_carro)
+)
+506341 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.carro_id_carro_seq OWNED BY public.Carro.id_carro
+506342 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.cartao_id_cartao_seq
+506342 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Cartao (
+                id_cartao BIGINT NOT NULL DEFAULT nextval('public.cartao_id_cartao_seq'),
+                numero VARCHAR(15) NOT NULL,
+                cod_seg BIGINT NOT NULL,
+                CONSTRAINT cartao_pk PRIMARY KEY (id_cartao)
+)
+506343 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.cartao_id_cartao_seq OWNED BY public.Cartao.id_cartao
+506343 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.id_tipo_cliente_seq_1
+506344 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Tipo_Cliente (
+                id_tipo_cliente BIGINT NOT NULL DEFAULT nextval('public.id_tipo_cliente_seq_1'),
+                nome VARCHAR(50) NOT NULL,
+                descricao TEXT(100) NOT NULL,
+                CONSTRAINT tipo_cliente_pk PRIMARY KEY (id_tipo_cliente)
+)
+506344 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.id_tipo_cliente_seq_1 OWNED BY public.Tipo_Cliente.id_tipo_cliente
+506345 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.cliente_vip_id_cliente_vip_seq
+506345 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Cliente_Vip (
+                id_cliente_vip BIGINT NOT NULL DEFAULT nextval('public.cliente_vip_id_cliente_vip_seq'),
+                id_tipo_cliente BIGINT NOT NULL,
+                saldo REAL NOT NULL,
+                CONSTRAINT cliente_vip_pk PRIMARY KEY (id_cliente_vip)
+)
+506346 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.cliente_vip_id_cliente_vip_seq OWNED BY public.Cliente_Vip.id_cliente_vip
+506346 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.cliente_id_cliente_seq
+506347 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Cliente (
+                id_cliente BIGINT NOT NULL DEFAULT nextval('public.cliente_id_cliente_seq'),
+                id_tipo_cliente BIGINT NOT NULL,
+                nome VARCHAR(50) NOT NULL,
+                cpf VARCHAR(11) NOT NULL,
+                telefone VARCHAR(11),
+                email VARCHAR(50) NOT NULL,
+                CONSTRAINT cliente_pk PRIMARY KEY (id_cliente)
+)
+506347 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.cliente_id_cliente_seq OWNED BY public.Cliente.id_cliente
+506348 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.carro_cliente_id_carro_cliente_seq
+506348 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Carro_Cliente (
+                id_carro_cliente BIGINT NOT NULL DEFAULT nextval('public.carro_cliente_id_carro_cliente_seq'),
+                id_cliente BIGINT NOT NULL,
+                id_carro BIGINT NOT NULL,
+                CONSTRAINT carro_cliente_pk PRIMARY KEY (id_carro_cliente)
+)
+506375 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.carro_cliente_id_carro_cliente_seq OWNED BY public.Carro_Cliente.id_carro_cliente
+506376 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.id_vaga_cliente_seq
+506376 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Vaga_Cliente (
+                id_vaga_cliente BIGINT NOT NULL DEFAULT nextval('public.id_vaga_cliente_seq'),
+                id_carro_cliente BIGINT NOT NULL,
+                id_vaga BIGINT NOT NULL,
+                status VARCHAR(8) NOT NULL,
+                entrada TIMESTAMP NOT NULL,
+                saida TIMESTAMP NOT NULL,
+                CONSTRAINT vaga_cliente_pk PRIMARY KEY (id_vaga_cliente)
+)
+506377 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.id_vaga_cliente_seq OWNED BY public.Vaga_Cliente.id_vaga_cliente
+506377 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.pagamento_id_pagamento_seq
+506378 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Pagamento (
+                id_pagamento BIGINT NOT NULL DEFAULT nextval('public.pagamento_id_pagamento_seq'),
+                id_vaga_cliente BIGINT NOT NULL,
+                data DATE NOT NULL,
+                hora TIME NOT NULL,
+                valor REAL NOT NULL,
+                CONSTRAINT id_pagamento PRIMARY KEY (id_pagamento)
+)
+506378 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.pagamento_id_pagamento_seq OWNED BY public.Pagamento.id_pagamento
+506379 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.cartao_cliente_id_cartao_cliente_seq
+506379 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Cartao_Cliente (
+                id_cartao_cliente BIGINT NOT NULL DEFAULT nextval('public.cartao_cliente_id_cartao_cliente_seq'),
+                id_cartao BIGINT NOT NULL,
+                id_cliente BIGINT NOT NULL,
+                CONSTRAINT cartao_cliente_pk PRIMARY KEY (id_cartao_cliente)
+)
+506380 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.cartao_cliente_id_cartao_cliente_seq OWNED BY public.Cartao_Cliente.id_cartao_cliente
+506380 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Login ADD CONSTRAINT funcionario_login_fk
+FOREIGN KEY (id_funcionario)
+REFERENCES public.Funcionario (id_funcionario)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+506381 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Vaga_Cliente ADD CONSTRAINT vaga_vaga_cliente_fk
+FOREIGN KEY (id_vaga)
+REFERENCES public.Vaga (id_vaga)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+506381 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Carro_Cliente ADD CONSTRAINT carro_carro_cliente_fk
+FOREIGN KEY (id_carro)
+REFERENCES public.Carro (id_carro)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+506382 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Cartao_Cliente ADD CONSTRAINT cartao_cartao_cliente_fk
+FOREIGN KEY (id_cartao)
+REFERENCES public.Cartao (id_cartao)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+506382 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Cliente ADD CONSTRAINT tipo_cliente_cliente_fk
+FOREIGN KEY (id_tipo_cliente)
+REFERENCES public.Tipo_Cliente (id_tipo_cliente)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+506383 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Cliente_Vip ADD CONSTRAINT tipo_cliente_cliente_vip_fk
+FOREIGN KEY (id_tipo_cliente)
+REFERENCES public.Tipo_Cliente (id_tipo_cliente)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+506383 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Cartao_Cliente ADD CONSTRAINT cliente_cartao_cliente_fk
+FOREIGN KEY (id_cliente)
+REFERENCES public.Cliente (id_cliente)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+506384 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Carro_Cliente ADD CONSTRAINT cliente_carro_cliente_fk
+FOREIGN KEY (id_cliente)
+REFERENCES public.Cliente (id_cliente)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+506384 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Vaga_Cliente ADD CONSTRAINT carro_cliente_vaga_cliente_fk
+FOREIGN KEY (id_carro_cliente)
+REFERENCES public.Carro_Cliente (id_carro_cliente)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+506384 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Pagamento ADD CONSTRAINT vaga_cliente_pagamento_fk
+FOREIGN KEY (id_vaga_cliente)
+REFERENCES public.Vaga_Cliente (id_vaga_cliente)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+506385 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - The list size is :46
+640901 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+CREATE SEQUENCE public.id_funcionario_seq
+640902 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Funcionario (
+                id_funcionario BIGINT NOT NULL DEFAULT nextval('public.id_funcionario_seq'),
+                nome VARCHAR(51) NOT NULL,
+                funcao VARCHAR(20) NOT NULL,
+                turno VARCHAR(5) NOT NULL,
+                telefone INTEGER NOT NULL,
+                email VARCHAR(50) NOT NULL,
+                CONSTRAINT funcionario_pk PRIMARY KEY (id_funcionario)
+)
+640902 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.id_funcionario_seq OWNED BY public.Funcionario.id_funcionario
+640903 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.login_id_login_seq
+640919 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Login (
+                id_login BIGINT NOT NULL DEFAULT nextval('public.login_id_login_seq'),
+                id_funcionario BIGINT NOT NULL,
+                login VARCHAR(12) NOT NULL,
+                senha VARCHAR(12) NOT NULL,
+                CONSTRAINT login_pk PRIMARY KEY (id_login)
+)
+640919 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.login_id_login_seq OWNED BY public.Login.id_login
+640920 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.vaga_id_vaga_seq
+640920 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Vaga (
+                id_vaga BIGINT NOT NULL DEFAULT nextval('public.vaga_id_vaga_seq'),
+                numero INTEGER NOT NULL,
+                tipo CHAR(10) NOT NULL,
+                status VARCHAR(8) NOT NULL,
+                CONSTRAINT vaga_pk PRIMARY KEY (id_vaga)
+)
+640921 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.vaga_id_vaga_seq OWNED BY public.Vaga.id_vaga
+640921 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.carro_id_carro_seq
+640922 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Carro (
+                id_carro BIGINT NOT NULL DEFAULT nextval('public.carro_id_carro_seq'),
+                placa VARCHAR(7) NOT NULL,
+                cor VARCHAR(10) NOT NULL,
+                modelo VARCHAR(20) NOT NULL,
+                CONSTRAINT carro_pk PRIMARY KEY (id_carro)
+)
+640922 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.carro_id_carro_seq OWNED BY public.Carro.id_carro
+640922 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.cartao_id_cartao_seq
+640923 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Cartao (
+                id_cartao BIGINT NOT NULL DEFAULT nextval('public.cartao_id_cartao_seq'),
+                numero VARCHAR(15) NOT NULL,
+                cod_seg BIGINT NOT NULL,
+                CONSTRAINT cartao_pk PRIMARY KEY (id_cartao)
+)
+640924 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.cartao_id_cartao_seq OWNED BY public.Cartao.id_cartao
+640924 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.id_tipo_cliente_seq_1
+640925 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Tipo_Cliente (
+                id_tipo_cliente BIGINT NOT NULL DEFAULT nextval('public.id_tipo_cliente_seq_1'),
+                nome VARCHAR(50) NOT NULL,
+                descricao TEXT(100) NOT NULL,
+                CONSTRAINT tipo_cliente_pk PRIMARY KEY (id_tipo_cliente)
+)
+640925 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.id_tipo_cliente_seq_1 OWNED BY public.Tipo_Cliente.id_tipo_cliente
+640925 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.cliente_vip_id_cliente_vip_seq
+640926 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Cliente_Vip (
+                id_cliente_vip BIGINT NOT NULL DEFAULT nextval('public.cliente_vip_id_cliente_vip_seq'),
+                id_tipo_cliente BIGINT NOT NULL,
+                saldo REAL NOT NULL,
+                CONSTRAINT cliente_vip_pk PRIMARY KEY (id_cliente_vip)
+)
+640926 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.cliente_vip_id_cliente_vip_seq OWNED BY public.Cliente_Vip.id_cliente_vip
+640927 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.cliente_id_cliente_seq
+640928 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Cliente (
+                id_cliente BIGINT NOT NULL DEFAULT nextval('public.cliente_id_cliente_seq'),
+                id_tipo_cliente BIGINT NOT NULL,
+                nome VARCHAR(50) NOT NULL,
+                cpf VARCHAR(11) NOT NULL,
+                telefone VARCHAR(11),
+                email VARCHAR(50) NOT NULL,
+                CONSTRAINT cliente_pk PRIMARY KEY (id_cliente)
+)
+640928 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.cliente_id_cliente_seq OWNED BY public.Cliente.id_cliente
+640928 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.carro_cliente_id_carro_cliente_seq
+640929 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Carro_Cliente (
+                id_carro_cliente BIGINT NOT NULL DEFAULT nextval('public.carro_cliente_id_carro_cliente_seq'),
+                id_cliente BIGINT NOT NULL,
+                id_carro BIGINT NOT NULL,
+                CONSTRAINT carro_cliente_pk PRIMARY KEY (id_carro_cliente)
+)
+640929 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.carro_cliente_id_carro_cliente_seq OWNED BY public.Carro_Cliente.id_carro_cliente
+640930 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.id_vaga_cliente_seq
+640930 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Vaga_Cliente (
+                id_vaga_cliente BIGINT NOT NULL DEFAULT nextval('public.id_vaga_cliente_seq'),
+                id_carro_cliente BIGINT NOT NULL,
+                id_vaga BIGINT NOT NULL,
+                status VARCHAR(8) NOT NULL,
+                entrada TIMESTAMP NOT NULL,
+                saida TIMESTAMP NOT NULL,
+                CONSTRAINT vaga_cliente_pk PRIMARY KEY (id_vaga_cliente)
+)
+640931 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.id_vaga_cliente_seq OWNED BY public.Vaga_Cliente.id_vaga_cliente
+640931 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.pagamento_id_pagamento_seq
+640932 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Pagamento (
+                id_pagamento BIGINT NOT NULL DEFAULT nextval('public.pagamento_id_pagamento_seq'),
+                id_vaga_cliente BIGINT NOT NULL,
+                data TIMESTAMP NOT NULL,
+                hora TIMESTAMP NOT NULL,
+                valor REAL NOT NULL,
+                CONSTRAINT id_pagamento PRIMARY KEY (id_pagamento)
+)
+640932 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.pagamento_id_pagamento_seq OWNED BY public.Pagamento.id_pagamento
+640933 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.cartao_cliente_id_cartao_cliente_seq
+640933 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.Cartao_Cliente (
+                id_cartao_cliente BIGINT NOT NULL DEFAULT nextval('public.cartao_cliente_id_cartao_cliente_seq'),
+                id_cartao BIGINT NOT NULL,
+                id_cliente BIGINT NOT NULL,
+                CONSTRAINT cartao_cliente_pk PRIMARY KEY (id_cartao_cliente)
+)
+640934 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.cartao_cliente_id_cartao_cliente_seq OWNED BY public.Cartao_Cliente.id_cartao_cliente
+640934 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Login ADD CONSTRAINT funcionario_login_fk
+FOREIGN KEY (id_funcionario)
+REFERENCES public.Funcionario (id_funcionario)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+640934 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Vaga_Cliente ADD CONSTRAINT vaga_vaga_cliente_fk
+FOREIGN KEY (id_vaga)
+REFERENCES public.Vaga (id_vaga)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+640935 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Carro_Cliente ADD CONSTRAINT carro_carro_cliente_fk
+FOREIGN KEY (id_carro)
+REFERENCES public.Carro (id_carro)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+640935 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Cartao_Cliente ADD CONSTRAINT cartao_cartao_cliente_fk
+FOREIGN KEY (id_cartao)
+REFERENCES public.Cartao (id_cartao)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+640936 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Cliente ADD CONSTRAINT tipo_cliente_cliente_fk
+FOREIGN KEY (id_tipo_cliente)
+REFERENCES public.Tipo_Cliente (id_tipo_cliente)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+640936 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Cliente_Vip ADD CONSTRAINT tipo_cliente_cliente_vip_fk
+FOREIGN KEY (id_tipo_cliente)
+REFERENCES public.Tipo_Cliente (id_tipo_cliente)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+640937 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Cartao_Cliente ADD CONSTRAINT cliente_cartao_cliente_fk
+FOREIGN KEY (id_cliente)
+REFERENCES public.Cliente (id_cliente)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+640937 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Carro_Cliente ADD CONSTRAINT cliente_carro_cliente_fk
+FOREIGN KEY (id_cliente)
+REFERENCES public.Cliente (id_cliente)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+640937 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Vaga_Cliente ADD CONSTRAINT carro_cliente_vaga_cliente_fk
+FOREIGN KEY (id_carro_cliente)
+REFERENCES public.Carro_Cliente (id_carro_cliente)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+640938 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.Pagamento ADD CONSTRAINT vaga_cliente_pagamento_fk
+FOREIGN KEY (id_vaga_cliente)
+REFERENCES public.Vaga_Cliente (id_vaga_cliente)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+640939 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - The list size is :46
