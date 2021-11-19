@@ -13,7 +13,7 @@ import psycopg2.extras
 conn = psycopg2.connect(host = DB_HOST, database = DB_NAME, user = DB_USER, password = DB_PASS, port = "5432")
 
 Builder.load_file('funcionarios.kv')
-
+#teste
 
 class MyLayout(TabbedPanel):  
   nome = ObjectProperty(None)
