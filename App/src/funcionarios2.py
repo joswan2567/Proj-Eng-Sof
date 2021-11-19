@@ -38,27 +38,26 @@ class MyLayout(TabbedPanel):
           conn.close
     pass
 
-
-    def editarDB(self):
-        id_fucionario = self.id_fucionario.int
-        nome = self.nome.text
-        telefone = self.telefone.text
-        funcao = self.funcao.text
-        turno = self.turno.text
-        email = self.email.text
-        print(nome)
-        with conn:
-          with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
-            cur.execute("UPDATE funcionario SET (nome,telefone,funcao,turno,email) = (%s,%s,%s,%s,%s) WHERE id_funcionario = 5", (nome,telefone,funcao,turno,email) )
-          conn.close
-        pass 
-    def deletarDB(self):
+  def editarDB(self):
       id_fucionario = self.id_fucionario.int
+      nome = self.nome.text
+      telefone = self.telefone.text
+      funcao = self.funcao.text
+      turno = self.turno.text
+      email = self.email.text
+      print(nome)
       with conn:
         with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
-          cur.execute("DELETE FROM funcionario WHERE id_fucionario = %d", (id_fucionario,) )
+          cur.execute("UPDATE funcionario SET (nome,telefone,funcao,turno,email) = (%s,%s,%s,%s,%s) WHERE id_funcionario = 5", (nome,telefone,funcao,turno,email) )
         conn.close
-      pass
+      pass 
+  def deletarDB(self):
+    id_fucionario = self.id_fucionario.int
+    with conn:
+      with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
+        cur.execute("DELETE FROM funcionario WHERE id_fucionario = %d", (id_fucionario,) )
+      conn.close
+    pass
 
 
 
