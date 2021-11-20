@@ -1,1 +1,12 @@
-from kivy.uix.tabbedpanel import TabbedPanel
+nome_inserir = ObjectProperty(None)
+  nome_update = ObjectProperty(None)
+  telefone_inserir = ObjectProperty(None)
+  telefone_update = ObjectProperty(None)
+  email_inserir = ObjectProperty(None)
+  email_update = ObjectProperty(None)
+  funcao_inserir = ObjectProperty(None)
+  funcao_update = ObjectProperty(None)
+  turno_inserir = ObjectProperty(None)
+  turno_update = ObjectProperty(None)
+  id_update = ObjectProperty(None)
+  id_deletar = ObjectProperty(None)     
