@@ -1,0 +1,152 @@
+#:import Factory kivy.factory.Factory
+<PopupSucesso@Popup>
+    auto_dismiss: True
+    size_hint: 0.6, 0.2
+    pos_hint: {"x": 0.2,"center": 0.5}
+    title: "Funcionário adicionado com sucesso!"
+    Button:
+        text: "Confirmar"
+        font_size: 15
+        on_release: root.dismiss()
+<PopupSucesso2@Popup>
+    auto_dismiss: True
+    size_hint: 0.6, 0.2
+    pos_hint: {"x": 0.2,"center": 0.5}
+    title: "Funcionário removido com sucesso!"
+    Button:
+        text: "Confirmar"
+        font_size: 15
+        on_release: root.dismiss()
+<PopupSucesso3@Popup>
+    auto_dismiss: True
+    size_hint: 0.6, 0.2
+    pos_hint: {"x": 0.2,"center": 0.5}
+    title: "Funcionário atualizado com sucesso!"
+    Button:
+        text: "Confirmar"
+        font_size: 15
+        on_release: root.dismiss()
+        
+
+<LayoutFuncionarios>
+    do_default_tab: False
+    nome_inserir: nome_inserir
+    telefone_inserir: telefone_inserir
+    email_inserir: email_inserir
+    funcao_inserir: funcao_inserir
+    turno_inserir: turno_inserir
+    id_excluir: id_excluir
+    id_update: id_update
+    nome_update:nome_update
+    telefone_update:telefone_update
+    email_update:email_update
+    funcao_update:funcao_update
+    turno_update:turno_update
+
+    TabbedPanelItem:
+        text: "Cadastrar"
+        GridLayout:
+            cols: 2
+            size: root.width,root.height
+            padding: 30
+            spacing: 20
+            Label:
+                text:'Nome do Funcionario'
+            TextInput:
+                id: nome_inserir
+                multiline: False
+            Label:
+                text:'Telefone do Funcionario'
+            TextInput:
+                id: telefone_inserir
+                multiline: False
+            Label:
+                text:'E-mail do Funcionario'
+            TextInput:
+                id: email_inserir
+                multiline: False
+            Label:
+                text:'Função do Funcionario'
+            TextInput:
+                id: funcao_inserir
+                multiline: False
+            Label:
+                text:'Turno do Funcionario'
+            TextInput:
+                id: turno_inserir
+                multiline: False
+            Button:
+                text: "Confirmar"
+                color:
+                on_press: root.enviarBD()
+                on_release: Factory.PopupSucesso().open()
+            Button:
+                text: "Cancelar"
+                color:
+    TabbedPanelItem:
+        text: "Excluir"
+        GridLayout:
+            cols: 2
+            size: root.width,root.height
+            padding: 30
+            spacing: 20
+            Label:
+                text: 'Id do Funcionário'
+            TextInput:
+                id: id_excluir
+                multiline: False
+            Button:
+                text: "Remover"
+                color:
+                on_press: root.deletarBD()
+                on_release: Factory.PopupSucesso2().open()
+            Button:
+                text: "Cancelar"
+                color:
+    TabbedPanelItem:
+        text:"Atualizar"
+        GridLayout:
+            cols: 2
+            size: root.width,root.height
+            padding: 30
+            spacing: 20
+            Label:
+                text: "Id do Funcionário"
+            TextInput:
+                id: id_update
+                multiline: False
+            Label:
+                text: "Novo Nome"
+            TextInput:
+                id: nome_update
+                multiline: False
+            Label:
+                text: "Novo Telefone"
+            TextInput:
+                id: telefone_update
+                multiline: False
+            Label:
+                text: "Novo E-mail"
+            TextInput:
+                id: email_update
+                multiline: False
+            Label:
+                text: "Nova Função"
+            TextInput:
+                id: funcao_update
+                multiline: False
+            Label:
+                text: "Novo Turno"
+            TextInput:
+                id: turno_update
+                multiline: False
+            Button:
+                text: "Atualização"
+                color:
+                on_press: root.atualizacaoBD()
+                on_release: Factory.PopupSucesso3().open()
+            Button:
+                text: "Cancelar"
+                color:
+    TabbedPanelItem:
+        text: "Listar"
