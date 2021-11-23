@@ -1,0 +1,75 @@
+
+<CadastrarApp>
+    do_default_tab: False        
+    GridLayout:
+        cols:1
+        size: root.width, root.height
+        padding: 30
+        spacing: 20           
+        BoxLayout:
+            orientation:'horizontal'
+            size_hint: 0.3, 0.3
+            size_hint_y: 0.2
+            Button:
+                text: "<-"
+                color:
+                on_press: root.back(root)
+            Label:
+                text: "Cadastro Cliente"
+                color:
+        GridLayout:
+            cols:2
+            size: root.width, root.height
+            #padding: 20
+            spacing: 10
+            Label:
+                text: "Nome"
+            TextInput:
+                id: nome
+                multiline:False
+
+            Label:
+                text: "Telefone"
+            TextInput:
+                id: telefone
+                multiline:False
+
+            Label:
+                text: "E-mail"
+            TextInput:
+                id: email
+                multiline:False
+
+            Label:
+                text: "CPF"
+            TextInput:
+                id: cpf
+                multiline:False
+
+            Label:
+                text: "Tipo"
+            Spinner:
+                id: tipo
+                text: 'Selecione'
+                values:["Normal", "Vip"]
+
+                #on_text: root.setFuncao(funcao_set.text)
+        BoxLayout:
+            orientation:'horizontal' 
+            Button:
+                text: "Confirmar"
+                size_hint: (None,None)   
+                width: 100
+                height: 100      
+                on_press:
+                    dados = root.ids
+                    #print(dados)
+                    root.inserirDB(dados)
+                    root.back(root)
+        
+            Button:
+                text: "Cancelar"
+                pos_hint: {'center_x': 0.5}
+                size_hint: (None,None)   
+                width: 100
+                height: 100  
