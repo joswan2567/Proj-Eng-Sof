@@ -1,0 +1,122 @@
+<Gerenciador>
+    TelaPrincipal:
+        name: "telap"
+    TelaCli:
+        name: "telac"
+    TelaFunc:
+        name: "telaf"
+    TelaLogin:
+        name: "telalogin"
+<TelaPrincipal>:
+    BoxLayout:
+        orientation: "vertical"
+        #size: size.width, root.height
+        #padding:150
+        #spacing:50
+        ActionBar:
+            ActionView:
+                ActionPrevious:
+                    title: "Inicio"
+                    on_release:app.root.current = "telap"
+                ActionButton:
+                    text: "Login"
+                    on_release:app.root.current = "telalogin"
+                ActionSeparator:
+                ActionButton:
+                    text:"Funcionários"
+                    on_release:app.root.current = "telaf"
+                ActionSeparator:
+                ActionButton:
+                    text:"Clientes"
+                    on_release:app.root.current = "telac"
+                ActionSeparator:
+                ActionButton:
+                    text: "Sair"
+                    on_release:app.stop()
+        Button:
+            text: "Fucionários"
+            font_size:32
+            #size_hint_x:None
+            #size_hint_y:None
+            #width:200
+            #height:100
+            #pos_hint: {'center_x': 0.5}
+            
+            on_release:app.root.current = "telaf"
+        Button:
+            text: "Clientes"
+            font_size:32
+            on_release:app.root.current = "telac"
+        Button:
+            text: "Sair"
+            font_size:32
+            on_release:app.stop()
+
+<TelaFunc>:
+    BoxLayout:
+        orientation:"vertical"
+        padding:150
+        spacing:50        
+        Button:
+            text: "Voltar"
+            font_size:32
+            on_release:app.root.current = "telap"
+        Button:
+            text: "Clientes"
+            font_size:32
+            on_release:app.root.current = "telac"
+        Button:
+            text: "Sair"
+            font_size:32
+            on_release:app.stop()
+
+<TelaCli>:
+    BoxLayout:
+        orientation:"vertical"
+        padding:150
+        spacing:50
+        
+        Button:
+            text: "Voltar"
+            font_size:32
+            on_release:app.root.current = "telap"
+        Button:
+            text:"Fucionários"
+            font_size:32
+            on_release:app.root.current = "telaf"
+        Button:
+            text: "Sair"
+            font_size:32
+            on_release:app.stop()
+<TelaLogin>:
+    BoxLayout:
+        orientation: "vertical"
+        padding:150
+        spacing:30
+        Label:
+            text: "Usuario"
+            font_size:20
+            size_hint_x:None
+            width:500
+        TextInput:
+            id: usuario
+            size_hint_x:None
+            width:500
+        Label:
+            text:"Senha"
+            font_size:20
+            size_hint_x:None
+            width:500
+        TextInput:
+            id: senha
+            size_hint_x:None
+            width:500
+        Button:
+            text: "Entrar"
+            size_hint_x:None
+            width:120
+        Button:
+            text: "Voltar"
+            size_hint_x:None
+            width:120
+            on_release:app.root.current = "telac"
