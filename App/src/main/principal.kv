@@ -1,0 +1,556 @@
+#: import Factory kivy.factory.Factory
+<RoundedButton@Button>
+    font_size:25
+    background_color: (0,0,0,0)
+    background_normal: ''
+    canvas.before:  
+        Color:
+            rgba: (48/255,84/255,150/255,1)
+        RoundedRectangle:
+            size: self.size  
+            pos: self.pos
+            radius: [50]
+<LoginButton@Button>
+    font_size:18
+    background_color: (0,0,0,0)
+    background_normal: ''
+    canvas.before:  
+        Color:
+            rgba: (48/255,84/255,150/255,1)
+        RoundedRectangle:
+            size: self.width, 60
+            pos: self.pos
+            radius: [50]
+<LoginPopup@Popup>
+    auto_dismiss: False
+    size_hint: 0.6, 0.7
+    pos_hint: {'x': 0.2,'center_y': 0.4}
+    title: ""
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        Label:
+            text: "Usuario"
+            font_size:20
+        TextInput:
+            id: usuario
+        Label:
+            text:"Senha"
+            font_size:20
+        TextInput:
+            id: senha
+        LoginButton:
+            text: "Entrar"
+            on_press: root.dismiss()
+            on_release: app.root.current = "telag"
+        LoginButton:
+            text: "Cancelar"
+            on_release: root.dismiss()
+<PopupSucesso@Popup>
+    auto_dismiss: True
+    size_hint: 0.6, 0.2
+    pos_hint: {"x": 0.2,"center": 0.5}
+    title: "Adicionado com sucesso!"
+    Button:
+        text: "Confirmar"
+        font_size: 15
+        on_release: root.dismiss()
+<PopupSucesso2@Popup>
+    auto_dismiss: True
+    size_hint: 0.6, 0.2
+    pos_hint: {"x": 0.2,"center": 0.5}
+    title: "Removido com sucesso!"
+    Button:
+        text: "Confirmar"
+        font_size: 15
+        on_release: root.dismiss()
+<PopupSucesso3@Popup>
+    auto_dismiss: True
+    size_hint: 0.6, 0.2
+    pos_hint: {"x": 0.2,"center": 0.5}
+    title: "Atualizado com sucesso!"
+    Button:
+        text: "Confirmar"
+        font_size: 15
+        on_release: root.dismiss()
+
+
+<Gerenciador>
+    TelaPrincipal:
+        name: "telaPrincipal"
+    TelaCli:
+        name: "telacli"
+    TelaCliCadastro:
+        name: "telaclicadas"
+    TelaCliExcluir:
+        name: "telacliexclu"
+    TelaCliListar:
+        name: "telaclilista"    
+    TelaFunc:
+        name: "telafunc"
+    TelaFuncCadastro:
+        name: "telafuncadas"
+    TelaFuncExcluir:
+        name: "telafunexclu"
+    TelaFuncListar:
+        name: "telafunclista"
+    TelaGerenciamento:
+        name: "telag"
+<TelaPrincipal>:
+    canvas.before:
+        Color:
+            rgba: (1,1,1,1)
+        Rectangle:
+            pos:self.pos
+            size: self.size
+    BoxLayout:
+        orientation: "vertical"
+        ActionBar:
+            padding:16
+            ActionView:
+                pos_hint: {"center_y": 1.0}
+                ActionPrevious:
+                    title: "Inicio"
+                    on_release:app.root.current = telaprincipal
+                ActionButton:
+                    text: "Login"
+                    on_release:Factory.LoginPopup().open()
+                ActionSeparator:
+                ActionButton:
+                    text: "Sair"
+                    on_release:app.stop()
+        Image:
+            source: "LogoPNG.png"
+            # ACHO QUE PODERIAMOS TIRAR ESSE BOTÃO PQJÁ TEMOS UM ALI EM CIMA
+        # RoundedButton:
+        #     text: "Sair"
+        #     size_hint: None, None
+        #     size: 180, 90
+        #     pos_hint: {"center_x": .5,"center_y": 0.2}
+        #     on_release:app.stop()
+            
+<TelaGerenciamento>:
+    canvas.before:
+        Color:
+            rgba: (1,1,1,1)
+        Rectangle:
+            pos:self.pos
+            size: self.size
+    BoxLayout:
+        orientation: "vertical"
+        BoxLayout:
+            padding:50
+            spacing: 20
+            orientation: "horizontal"
+            RoundedButton:
+                text: "Cliente"
+                on_press: app.root.current = "telacli"
+            RoundedButton:
+                text: "Funcionario"
+                on_press: app.root.current = "telafunc"
+<TelaFunc>:
+    canvas.before:
+        Color:
+            rgba: (1,1,1,1)
+        Rectangle:
+            pos:self.pos
+            size: self.size
+    GridLayout:
+        rows: 3
+        GridLayout:
+            cols: 3
+            padding: 0
+            spacing: 0
+            Button:
+                text: 'Cadastro'
+                background_color: 0,0,0,0
+                on_press: app.root.current = "telafuncadas"
+                Image:
+                    source: "AdicionarPNG.png"
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+            Button:
+                text: 'Excluir'
+                background_color: 0,0,0,0
+                on_press: app.root.current = "telafunexclu"
+                Image:
+                    source: "ExcluirPNG.png"
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+            Button:
+                text: 'Listar'
+                background_color: 0,0,0,0
+                on_press: app.root.current = "telafunclista"
+                Image:
+                    source: "ListaPNG.png"
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+        # GridLayout:
+        #     cols: 3
+        #     spacing: 40
+        #     Label:
+        #         text: "Adicionar"
+        #         color: 'black'
+        #     Label:
+        #         text: "Deletar"
+        #         color: 'black'
+        #     Label:
+        #         text: "Listar"
+        #         color: 'black'          
+        GridLayout:
+            cols: 3
+            padding: 50
+            spacing: 10
+            Button:
+                background_color: (0,0,0,0)
+                background_normal: ''
+            RoundedButton:
+                text: 'Voltar'
+                on_press: app.root.current = "telag"  
+            Button:
+                background_color: (0,0,0,0)
+                background_normal: ''      
+
+
+
+<TelaFuncCadastro>:
+    nome_inserir: nome_inserir
+    telefone_inserir: telefone_inserir
+    email_inserir: email_inserir
+    funcao_inserir: funcao_inserir
+    turno_inserir: turno_inserir
+    canvas.before:
+        Color:
+            rgba: (1,1,1,1)
+        Rectangle:
+            pos:self.pos
+            size: self.size
+    
+    GridLayout:
+        cols: 2
+        size: root.width,root.height
+        padding: 30
+        spacing: 20
+        Label:
+            text:'Nome do Funcionario'
+            color: "black"
+        TextInput:
+            id: nome_inserir
+            multiline: False
+        Label:
+            text:'Telefone do Funcionario'
+            color: "black"
+        TextInput:
+            id: telefone_inserir
+            multiline: False
+        Label:
+            text:'E-mail do Funcionario'
+            color: "black"
+        TextInput:
+            id: email_inserir
+            multiline: False
+        Label:
+            text:'Função do Funcionario'
+            color: "black"
+        TextInput:
+            id: funcao_inserir
+            multiline: False
+        Label:
+            text:'Turno do Funcionario'
+            color: "black"
+        TextInput:
+            id: turno_inserir
+            multiline: False
+        Button:
+            text: "Confirmar"
+            color:
+            on_press: root.enviarBD()
+            on_release: Factory.PopupSucesso().open()
+        Button:
+            text: "Cancelar"
+            on_press: app.root.current="telafunc"
+
+<TelaFuncExcluir>:
+    id_excluir: id_excluir
+    canvas.before:
+        Color:
+            rgba: (1,1,1,1)
+        Rectangle:
+            pos:self.pos
+            size: self.size
+    GridLayout:
+        cols: 2
+        size: root.width,root.height
+        padding: 100
+        spacing: 20
+        Label:
+            text: 'Id do Funcionário'
+            color: "black"
+        TextInput:
+            id: id_excluir
+            multiline: False
+        Button:
+            text: "Remover"
+            color:
+            on_press: root.deletarBD()
+            on_release: Factory.PopupSucesso2().open()
+        Button:
+            text: "Cancelar"
+            on_press: app.root.current="telafunc"
+
+<TelaFuncListar>:
+    # # id_update: id_update
+    # # nome_update:nome_update
+    # # telefone_update:telefone_update
+    # # email_update:email_update
+    # # funcao_update:funcao_update
+    # # turno_update:turno_update
+    # canvas.before:
+    #     Color:
+    #         rgba: (1,1,1,1)
+    #     Rectangle:
+    #         pos:self.pos
+    #         size: self.size
+    # BoxLayout:
+    #     orientation:'vertical'
+    #     padding: 20
+    #     height: 25
+    #     GridLayout:
+    #         size_hint: 1, None
+    #         size_hint_y: None
+    #         height: 25
+    #         cols: 7
+    #         Label:
+    #             text: "ID"
+    #             color: "black"
+    #         Label:
+    #             text: "Tipo"
+    #             color: "black"
+    #         Label:
+    #             text: "Nome"
+    #             color: "black"
+    #         Label:
+    #             text: "CPF"
+    #             color: "black"
+    #         Label:
+    #             text: "Telefone"
+    #             color: "black"
+    #         Label:
+    #             text: "Email"
+    #             color: "black"
+    #     GridLayout:
+    #         size_hint: 1, None
+    #         size_hint_y: None
+    #         height: 25
+    #         cols: 6
+    #         Label:
+    #             text: "ID"
+    #         Label:
+    #             text: "Nome"
+    #         Label:
+    #             text: "Telefone"
+    #         Label:
+    #             text: "Função"
+    #         Label:
+    #             text: "Turno"
+    #         Label:
+    #             text: "Email"    
+
+    #     BoxLayout:
+    #         orientation: 'horizontal'
+    #         RecycleView:
+    #             viewclass: 'SelectableButton'
+    #             data: [{'text': str(x)} for x in root.data_items]
+    #             SelectableRecycleGridLayout:
+    #                 cols: 6
+    #                 default_size: None, dp(26)
+    #                 default_size_hint: 1, None
+    #                 size_hint_y: None
+    #                 height: self.minimum_height
+    #                 #orientation: 'vertical'
+    #                 multiselect: True
+    #                 touch_multiselect: True
+
+    Button:
+        text: "Cancelar"
+        on_press: app.root.current="telafunc"
+
+<TelaCli>:
+    canvas.before:
+        Color:
+            rgba: (1,1,1,1)
+        Rectangle:
+            pos:self.pos
+            size: self.size
+    GridLayout:
+        rows: 3
+        GridLayout:
+            cols: 3
+            padding: 0
+            spacing: 0
+            Button:
+                text: 'Cadastro'
+                background_color: 0,0,0,0
+                on_press: app.root.current = "telaclicadas"
+                Image:
+                    source: "AdicionarPNG.png"
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+            Button:
+                text: 'Excluir'
+                background_color: 0,0,0,0
+                on_press: app.root.current = "telacliexclu"
+                Image:
+                    source: "ExcluirPNG.png"
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+            Button:
+                text: 'Listar'
+                background_color: 0,0,0,0
+                on_press: app.root.current = "telaclilista"
+                Image:
+                    source: "ListaPNG.png"
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                
+        GridLayout:
+            cols: 3
+            padding: 50
+            spacing: 10
+            Button:
+                background_color: (0,0,0,0)
+                background_normal: ''
+            RoundedButton:
+                text: 'Voltar'
+                on_press: app.root.current = "telag"  
+            Button:
+                background_color: (0,0,0,0)
+                background_normal: ''      
+
+
+
+
+<TelaCliCadastro>:
+    nome_inserir: nome_inserir
+    telefone_inserir: telefone_inserir
+    email_inserir: email_inserir
+    cpf_inserir: cpf_inserir
+    tipo_inserir: tipo_inserir
+    canvas.before:
+        Color:
+            rgba: (1,1,1,1)
+        Rectangle:
+            pos:self.pos
+            size: self.size
+    GridLayout:
+        cols: 2
+        size: root.width,root.height
+        padding: 30
+        spacing: 20
+        Label:
+            text:'Nome do Cliente'
+            color: "black"
+        TextInput:
+            id: nome_inserir
+            multiline: False
+        Label:
+            text:'Telefone do Cliente'
+            color: "black"
+        TextInput:
+            id: telefone_inserir
+            multiline: False
+        Label:
+            text:'E-mail do Cliente'
+            color: "black"
+        TextInput:
+            id: email_inserir
+            multiline: False
+        Label:
+            text:'CPF do Cliente'
+            color: "black"
+        TextInput:
+            id: cpf_inserir
+            multiline: False
+        Label:
+            text:'Tipo do Cliente'
+            color: "black"
+        Spinner:
+            id: tipo_inserir
+            text: 'Selecione'
+            values:["Normal", "Vip"]    
+        Button:
+            text: "Confirmar"
+            on_press: root.enviarBDcli()
+            on_release: Factory.PopupSucesso().open()
+        Button:
+            text: "Cancelar"
+            on_press: app.root.current="telacli"
+
+<TelaCliExcluir>:
+    id_excluir: id_excluir
+    canvas.before:
+        Color:
+            rgba: (1,1,1,1)
+        Rectangle:
+            pos:self.pos
+            size: self.size
+    GridLayout:
+        cols: 2
+        size: root.width,root.height
+        padding: 100
+        spacing: 20
+        Label:
+            text: 'Id do Cliente'
+            color: "black"
+        TextInput:
+            id: id_excluir
+            multiline: False
+        Button:
+            text: "Remover"
+            on_press: root.deletarBD()
+            on_release: Factory.PopupSucesso2().open()
+        Button:
+            text: "Cancelar"
+            on_press: app.root.current="telacli"
+<TelaCliListar>:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<SelectableButton>:
+    canvas.before:
+        Color:
+            rgba: (1, 0, 0, 1) if self.selected else (0, 0, 0, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+        
