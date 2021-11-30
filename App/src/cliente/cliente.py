@@ -148,6 +148,8 @@ class RV(BoxLayout):
         for row in rows:
             for col in row:
                 self.data_items.append(col)
+            self.data_items.append("edit")
+            self.data_items.append("del")
 
     def cd(self):  
         self.clear_widgets()
@@ -160,12 +162,12 @@ class RV(BoxLayout):
         cursor.execute("SELECT * FROM public.cliente WHERE nome LIKE '%" + value + "%'")
         rows = cursor.fetchall()
         self.data_items = []
-        if len(rows) > 1:
+        if len(rows) == 0:
+            self.data_items.append("Não há dados compatíveis")
+        else:
             for row in rows:
                 for col in row:
                     self.data_items.append(col)
-        else:
-            self.data_items.append("Não há dados compatíveis")
         print(self.data_items)
 
 class ClienteListApp(App):

@@ -30,85 +30,67 @@
             size: self.size
 
 <RV>:
+    # BoxLayout:
+    orientation: "vertical"
+    padding: 20
+    height: 25
     BoxLayout:
-        orientation: "vertical"
-        padding: 20
+        orientation:'horizontal'
+        size_hint_y: 0.3
+        Button:
+            text: "<-"
+            on_press:
+        Label:
+            text: "Clientes"
+            font_size: 24
+        Button:
+            text: "Adicionar"
+            on_release: 
+                root.cd()
+    BoxLayout:
+        orientation:'horizontal'
+        size_hint_y: 0.2
+        TextInput:
+            id: pesquisar
+            multiline:False
+            on_text: root.buscar(root.ids.pesquisar.text)
+
+        Button:
+            text: "Buscar"
+
+    GridLayout:
+        size_hint: 1, None
+        size_hint_y: None
         height: 25
-        BoxLayout:
-            orientation:'horizontal'
-            size_hint_y: 0.3
-            Button:
-                text: "<-"
-                on_press:
-            Label:
-                text: "Clientes"
-                font_size: 24
-            Button:
-                text: "Adicionar"
-                on_release: 
-                    root.cd()
-        BoxLayout:
-            orientation:'horizontal'
-            size_hint_y: 0.2
-            TextInput:
-                id: pesquisar
-                multiline:False
-                on_text: root.buscar(root.ids.pesquisar.text)
+        cols: 8
+        Label:
+            text: "ID"
+        Label:
+            text: "Tipo"
+        Label:
+            text: "Nome"
+        Label:
+            text: "CPF"
+        Label:
+            text: "Telefone"
+        Label:
+            text: "Email"    
+        Label:
+            text: ""    
+        Label:
+            text: ""    
 
-            Button:
-                text: "Buscar"
-
-        GridLayout:
-            size_hint: 1, None
-            size_hint_y: None
-            height: 25
-            cols: 7
-            Label:
-                text: "ID"
-            Label:
-                text: "Tipo"
-            Label:
-                text: "Nome"
-            Label:
-                text: "CPF"
-            Label:
-                text: "Telefone"
-            Label:
-                text: "Email"    
-
-        BoxLayout:
-            orientation: 'horizontal'
-            RecycleView:
-                viewclass: 'SelectableButton'
-                data: [{'text': str(x)} for x in root.data_items]
-                SelectableRecycleGridLayout:
-                    cols: 6
-                    default_size: None, dp(26)
-                    default_size_hint: 1, None
-                    size_hint_y: None
-                    height: self.minimum_height
-                    #orientation: 'vertical'
-                    multiselect: True
-                    touch_multiselect: True
-            # RecycleView:
-            #     viewclass: 'SelectableButton'
-            #     data:[{'text': str(x)} for x in range(3)]
-            #     SelectableRecycleGridLayout:
-            #         cols: 
-            #         default_size: None, dp(26)
-            #         default_size_hint: 1, None
-            #         size_hint_y: None
-            #         height: self.minimum_height
-            #         #orientation: 'vertical'
-            #         multiselect: True
-            #         touch_multiselect: True
-            #         BoxLayout:
-            #             orientation:'vertical'
-            #             BoxLayout:
-            #                 orientation:'horizontal'
-            #                 Button:
-            #                     text: "Delete"
-            #                     color: 1,0,0,1
-            #                 Button:
-            #                     text: "Editar"
-            #                     color: 1,1,0,1
+    BoxLayout:
+        orientation: 'horizontal'
+        RecycleView:
+            viewclass: 'SelectableButton'
+            data: [{'text': str(x)} for x in root.data_items]
+            SelectableRecycleGridLayout:
+                cols: 8
+                default_size: None, dp(26)
+                default_size_hint: 1, None
+                size_hint_y: None
+                height: self.minimum_height
+                #orientation: 'vertical'
+                multiselect: True
+                touch_multiselect: True
