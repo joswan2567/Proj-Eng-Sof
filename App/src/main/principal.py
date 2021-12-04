@@ -74,12 +74,36 @@ class SelectableButton(RecycleDataViewBehavior, Button):
         self.text = txt
 
 class Gerenciador(ScreenManager):
+    def autenticarLogin(self,p,login,senha):
+        #login = self.login.text
+        #senha = self.senha.text
+        print(login+senha)
+        cs = conn.cursor()
+        cs.execute("SELECT * FROM Login l WHERE  l.login LIKE \'" + str(login) + "\' AND l.senha like \'" + str(senha) + "\' ORDER BY l.id_login ASC")
+        senha_bd = cs.fetchall()
+        
+        if len(senha_bd) > 0:
+
+            print(senha_bd)
+            self.current = "telag"
+            p.dismiss()
+
+            #print(p.ids)
+            #self.ids.login_pop.dismiss()
+        else:
+            
+            p.ids.usuario.text = ""
+            p.ids.senha.text = ""
+            
+        
     pass
 
 class TelaPrincipal(Screen): 
     pass
 
 class TelaLogin(Screen):
+    
+
     pass
 
 class TelaGerenciamento(Screen):

@@ -27,6 +27,7 @@
     size_hint: 0.6, 0.7
     pos_hint: {'x': 0.2,'center_y': 0.4}
     title: ""
+    id: login_pop
     BoxLayout:
         orientation: "vertical"
         size: root.width, root.height
@@ -42,8 +43,9 @@
             id: senha
         LoginButton:
             text: "Entrar"
-            on_press: root.dismiss()
-            on_release: app.root.current = "telag"
+            #on_press: print(usuario.text+senha.text)
+            on_press: app.root.autenticarLogin(login_pop,usuario.text,senha.text)
+           #on_release: app.root.current = "telag"
         LoginButton:
             text: "Cancelar"
             on_release: root.dismiss()
