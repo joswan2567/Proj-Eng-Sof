@@ -39,7 +39,7 @@ class CadastrarApp(TabbedPanel):
       print ("entrou")
       with conn:
           with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
-              cur.execute("INSERT INTO public.cliente (nome,telefone,email,cpf,id_tipo_cliente) VALUES (%s,%s,%s,%s,%s)",(nome,telefone,email,cpf,tipo) )
+              cur.execute("INSERT INTO public.cliente (id_cliente,nome,telefone,email,cpf,id_tipo_cliente) VALUES (%s,%s,%s,%s,%s,%s)",((len(dt_items) / 6) + 1, nome,telefone,email,cpf,tipo) )
           conn.close
     pass
   # def editarDB(self):
@@ -129,11 +129,11 @@ class ButtonActions(BoxLayout):
     def delete(self, init, lt):
         self.data = list(dt_items[init:init+6])
         print(self.data)
-        idx = self.data[0]
-        with conn:
-            with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
-                cur.execute("DELETE FROM cliente WHERE id_cliente = %s", (str(idx) ))
-        conn.close
+        # idx = self.data[0]
+        # with conn:
+        #     with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
+        #         cur.execute("DELETE FROM cliente WHERE id_cliente = %s", (str(idx) ))
+        # conn.close
         # del dt_items[(idx - 1) * 6: ((idx - 1) * 6) + 6]
         # lt.data_items = dt_items
         lt.get_users()
@@ -179,6 +179,7 @@ class RV(BoxLayout):
 
     def get_users(self):
         dt_items.clear()
+        self.data_items.clear()
         connection = conn
         cursor = connection.cursor()
 
