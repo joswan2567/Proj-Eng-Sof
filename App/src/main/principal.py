@@ -80,31 +80,31 @@ class TelaFuncExcluir(Screen):
     #     print(self.data_items)
 
 class TelaFuncListar(Screen):
-#     data_items = ListProperty([])
+    # data_items = ListProperty([])
 
-#     def __init__(self, **kwargs):
-#         super(TelaFuncListar, self).__init__(**kwargs)
-#         self.get_users()
-#         pass
+    # def __init__(self, **kwargs):
+    #     super(TelaFuncListar, self).__init__(**kwargs)
+    #     self.get_users()
+    #     pass
 
-#     def get_users(self):
-#         connection = conn
-#         cursor = connection.cursor()
+    # def get_users(self):
+    #     connection = conn
+    #     cursor = connection.cursor()
 
-#         cursor.execute("SELECT * FROM public.funcionario ORDER BY id_funcionario ASC")
-#         rows = cursor.fetchall()
-#         print(rows)
-#         for row in rows:
-#             for col in row:
-#                 self.data_items.append(col)
-#         pass
+    #     cursor.execute("SELECT * FROM public.funcionario ORDER BY id_funcionario ASC")
+    #     rows = cursor.fetchall()
+    #     print(rows)
+    #     for row in rows:
+    #         for col in row:
+    #             self.data_items.append(col)
+    #     pass
 
-#     def cd(self):  
-#         self.clear_widgets()
-#         TelaFuncListar().run()
+    # def cd(self):  
+    #     self.clear_widgets()
+    #     TelaFuncListar().run()
 
-#     title = "Funcionarios"
-#     def build(self):
+    # title = "Funcionarios"
+    # def build(self):
     pass    
 
 class TelaCli(Screen):
