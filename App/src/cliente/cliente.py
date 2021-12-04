@@ -119,6 +119,7 @@ class TextInputPopup(Popup):
 class SelectableRecycleGridLayout(FocusBehavior, LayoutSelectionBehavior,
                                   RecycleGridLayout):
     ''' Adds selection and focus behaviour to the view. '''
+    
 class ButtonActions(BoxLayout):
     data = []
     def edit(self, init):

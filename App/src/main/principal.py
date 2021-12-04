@@ -19,9 +19,11 @@ from kivy.uix.recycleview import RecycleView
 from kivy.uix.behaviors import FocusBehavior
 from kivy.uix.button import Button
 from kivy.uix.image import Image
-
-
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.popup import Popup
+
+
+dt_items=[]
 
 class SelectableRecycleGridLayout(FocusBehavior, LayoutSelectionBehavior,
                                   RecycleGridLayout):
@@ -102,14 +104,15 @@ class TelaPrincipal(Screen):
     pass
 
 class TelaLogin(Screen):
-    
-
     pass
 
 class TelaGerenciamento(Screen):
     pass
 
 class TelaFunc(Screen):
+    pass
+
+class TelaPagamento(Screen):
     pass
 
 class TelaFuncCadastro(Screen):
@@ -206,20 +209,20 @@ class TelaCliListar(Screen):
     def __init__(self, **kwargs):
         super(TelaCliListar, self).__init__(**kwargs)
         self.get_users()
-        pass
 
     def get_users(self):
+        dt_items.clear()
         connection = conn
         cursor = connection.cursor()
 
         cursor.execute("SELECT * FROM public.cliente ORDER BY id_cliente ASC")
         rows = cursor.fetchall()
-        print(rows)
+        # print(rows)
+        # create data_items
         for row in rows:
             for col in row:
-                self.data_items.append(col)
-            self.data_items.append("Editar")
-        pass
+                dt_items.append(col)
+        self.data_items = dt_items
 
     def cd(self):  
         self.clear_widgets()
@@ -229,6 +232,68 @@ class TelaCliListar(Screen):
     def build(self):
         pass    
     pass
+
+
+class TextInputPopup(Popup):
+    obj = ObjectProperty(None)
+    id = StringProperty("")
+    id_cliente = StringProperty("")
+    nome = StringProperty("")
+    telefone = StringProperty("")
+    cpf = StringProperty("")
+    email = StringProperty("")
+
+    def __init__(self, obj, **kwargs):
+        super(TextInputPopup, self).__init__(**kwargs)
+        # print(obj.data)
+        self.obj = obj
+        self.id = str(obj.data[0])
+        self.id_cliente = str(obj.data[1])
+        self.nome = str(obj.data[2])
+        self.telefone = str(obj.data[3])
+        self.cpf = str(obj.data[4])
+        self.email = str(obj.data[5])
+    
+    def save(self, lt):
+        idx = int(self.id) - 1
+        dt_items[idx] = self.id
+        dt_items[idx+1] = self.id_cliente
+        dt_items[idx+2] = self.nome
+        dt_items[idx+3] = self.telefone
+        dt_items[idx+4] = self.cpf
+        dt_items[idx+5] = self.email
+        # lt.data_items = dt_items
+        # lt.ids.lt.refresh_from_data()
+        lt.get_users()
+        lt.ids.lt.refresh_from_data()
+        lt.ids.bt_act.refresh_from_data()
+        with conn:
+            with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
+                cur.execute("UPDATE cliente SET (nome,telefone,cpf,email) = (%s,%s,%s,%s) WHERE id_cliente = %s", (self.nome, self.telefone, self.cpf, self.email, self.id))
+            conn.close 
+
+  
+class ButtonActions(BoxLayout):
+    data = []
+    def edit(self, init):
+        self.data = list(dt_items[init:init+6])
+        popup = TextInputPopup(self)
+        popup.open()
+
+    def delete(self, init, lt):
+        self.data = list(dt_items[init:init+6])
+        print(self.data)
+        idx = self.data[0]
+        with conn:
+            with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
+                cur.execute("DELETE FROM cliente WHERE id_cliente = %s", (str(idx) ))
+        conn.close
+        # del dt_items[(idx - 1) * 6: ((idx - 1) * 6) + 6]
+        # lt.data_items = dt_items
+        lt.get_users()
+        lt.ids.lt.refresh_from_data()
+        lt.ids.bt_act.refresh_from_data()
+  
 
 class principalApp(App): 
     def build(self):

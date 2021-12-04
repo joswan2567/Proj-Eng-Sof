@@ -1,1 +1,2 @@
-SelectableButton
+class TelaPagamento(Screen):
+#     pass

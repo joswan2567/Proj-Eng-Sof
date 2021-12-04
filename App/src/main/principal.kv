@@ -99,6 +99,8 @@
         name: "telafunclista"
     TelaGerenciamento:
         name: "telag"
+    TelaPagamento:
+        name: "telpag"
 <TelaPrincipal>:
     canvas.before:
         Color:
@@ -150,8 +152,16 @@
                     allow_stretch: True
             Button:
                 text: "Cliente"
-                background_color: 0,0,0,0
+                # background_color: 0,0,0,0
                 on_press: app.root.current = "telacli"
+                # Image:
+                #     source: "Imagens\estacionamento.png"
+                #     center_x: self.parent.center_x
+                #     center_y: self.parent.center_y
+            Button:
+                text: "Pagamento"
+                background_color: 0,0,0,0
+                on_press: app.root.current = "telpag"
                 Image:
                     source: "Imagens\estacionamento.png"
                     center_x: self.parent.center_x
@@ -533,76 +543,128 @@
             pos:self.pos
             size: self.size
     BoxLayout:
-        orientation:'vertical'
-        padding: 20
-        height: 25
-        GridLayout:
-            size_hint: 1, None
-            size_hint_y: None
-            height: 25
-            cols: 7
-            Label:
-                text: "ID"
-                color: "black"
-            Label:
-                text: "Tipo de Cliente"
-                color: "black"
-            Label:
-                text: "Nome"
-                color: "black"
-            Label:
-                text: "CPF"
-                color: "black"     
-            Label:
-                text: "Telefone"
-                color: "black"
-            Label:
-                text: "Email"
-                color: "black"
-            Label:
-                text: "Edit"
-                color: "black"
-        GridLayout:
-            size_hint: 1, None
-            size_hint_y: None
-            height: 25
-            cols: 7
-            Label:
-                text: "ID"
-            Label:
-                text: "Tipo de Cliente"
-            Label:
-                text: "Nome"
-            Label:
-                text: "CPF"
-            Label:
-                text: "Telefone"
-            Label:
-                text: "Email"
-            Label:
-                text: "Edit"
+        orientation:'horizontal'
 
         BoxLayout:
-            orientation: 'horizontal'
+            orientation:'vertical'
+
+            GridLayout:
+                size_hint: 1, None
+                size_hint_y: None
+                height: 25
+                cols: 6
+                Label:
+                    text: "ID"
+                Label:
+                    text: "Tipo"
+                Label:
+                    text: "Nome"
+                Label:
+                    text: "CPF"
+                Label:
+                    text: "Telefone"
+                Label:
+                    text: "Email"    
+                Label:
+                #     text: "Editar"    
+                # Label:
+                #     text: "Deletar"    
+
+            BoxLayout:
+                orientation: 'horizontal'
+                RecycleView:
+                    id: lt
+                    viewclass: 'SelectableButton'
+                    data: [{'text': str(x)} for x in root.data_items]
+                    SelectableRecycleGridLayout:
+                        cols: 6
+                        default_size: None, dp(26)
+                        default_size_hint: 1, None
+                        size_hint_y: None
+                        height: self.minimum_height
+                        #orientation: 'vertical'
+                        multiselect: True
+                        touch_multiselect: True
+        BoxLayout:
+            orientation:'vertical'
+
+            GridLayout:
+                size_hint: 1, None
+                size_hint_y: None
+                height: 25
+                cols: 2
+                Label:
+                    text: "Editar"
+                    size_hint: .5, 1
+                Label:
+                    text: "Deletar"
+                    size_hint: .5, 1
             RecycleView:
-                viewclass: 'SelectableButton'
-                data: [{'text': "Editar" if str(x) is 'Editar' else str(x)} for x in root.data_items]
+                id: bt_act
+                viewclass: 'ButtonActions'
+                data: [{'id': x } for x in range(int(len(root.data_items)/6))]
                 SelectableRecycleGridLayout:
-                    cols: 7
+                    cols: 1
                     default_size: None, dp(26)
                     default_size_hint: 1, None
                     size_hint_y: None
                     height: self.minimum_height
+                    #orientation: 'vertical'
                     multiselect: True
                     touch_multiselect: True
-                    
         RoundedButton:
             text: "Voltar"
             size_hint: 0.3, 0.3
             pos_hint: {"center_x": 0.5}
             on_press: app.root.current="telacli"
 
+<ButtonActions>:
+    # size: '100dp','100dp'
+    size: 200,100
+    size_hint: None, None
+    Button:
+        size_hint: .2, 1
+        text: ""
+        color:
+        on_press: 
+            # print(f'dados: ${app.root.data_items[root.id*6:(root.id*6)+6]} id:${root.id}')
+            root.edit(root.id*6)
+        Image:
+            source: "../../assets/icons/edit1.png"
+            center_x: self.parent.center_x
+            center_y: self.parent.center_y
 
+    Button:
+        size_hint: 0.2, 1
+        text: ""
+        color:
+        on_press: 
+            # print(f'dados: ${app.root.data_items[root.id*6:(root.id*6)+6]} id:${root.id}')
+            root.delete(root.id*6,app.root)
+
+        Image:
+            source: "../../assets/icons/delete1.png"
+            center_x: self.parent.center_x
+            center_y: self.parent.center_y
+
+    
+
+
+<TelaPagamento>:
+    GridLayout:
+        cols: 3
+        padding: 50
+        spacing: 10
+        Button:
+            background_color: (0,0,0,0)
+            background_normal: ''
+        RoundedButton:
+            text: 'Voltar'
+            size_hint: 0.3,0.05
+            on_press: app.root.current = "telag"  
+        Button:
+            background_color: (0,0,0,0)
+            background_normal: ''  
 <SelectableButton>:
     canvas.before:
         Color:
