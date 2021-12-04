@@ -152,6 +152,7 @@
                     text: "Deletar"
                     size_hint: .5, 1
             RecycleView:
+                id: bt_act
                 viewclass: 'ButtonActions'
                 data: [{'id': x } for x in range(int(len(root.data_items)/6))]
                 SelectableRecycleGridLayout:

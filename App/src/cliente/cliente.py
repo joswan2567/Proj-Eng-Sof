@@ -103,11 +103,17 @@ class TextInputPopup(Popup):
         dt_items[idx] = self.id
         dt_items[idx+1] = self.id_cliente
         dt_items[idx+2] = self.nome
-        lt.data_items = dt_items
+        dt_items[idx+3] = self.telefone
+        dt_items[idx+4] = self.cpf
+        dt_items[idx+5] = self.email
+        # lt.data_items = dt_items
+        # lt.ids.lt.refresh_from_data()
+        lt.get_users()
         lt.ids.lt.refresh_from_data()
+        lt.ids.bt_act.refresh_from_data()
         with conn:
             with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
-                cur.execute("UPDATE cliente SET (nome,telefone,cpf,email) = (%s,%s,%s,%s) WHERE id_cliente = %s", (self.nome, self.telefone, self.cpf, self.email, str(idx+1)))
+                cur.execute("UPDATE cliente SET (nome,telefone,cpf,email) = (%s,%s,%s,%s) WHERE id_cliente = %s", (self.nome, self.telefone, self.cpf, self.email, self.id))
             conn.close 
 
 class SelectableRecycleGridLayout(FocusBehavior, LayoutSelectionBehavior,
@@ -128,9 +134,12 @@ class ButtonActions(BoxLayout):
             with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
                 cur.execute("DELETE FROM cliente WHERE id_cliente = %s", (str(idx) ))
         conn.close
-        del dt_items[(idx - 1) * 6: ((idx - 1) * 6) + 6]
-        lt.data_items = dt_items
+        # del dt_items[(idx - 1) * 6: ((idx - 1) * 6) + 6]
+        # lt.data_items = dt_items
+        lt.get_users()
         lt.ids.lt.refresh_from_data()
+        lt.ids.bt_act.refresh_from_data()
+        
 
 class SelectableButton(RecycleDataViewBehavior, Button):
     ''' Add selection support to the Button '''
