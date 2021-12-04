@@ -10,6 +10,7 @@
             size: self.size  
             pos: self.pos
             radius: [50]
+
 <LoginButton@Button>
     font_size:18
     background_color: (0,0,0,0)
@@ -123,13 +124,7 @@
                     on_release:app.stop()
         Image:
             source: "LogoPNG.png"
-            # ACHO QUE PODERIAMOS TIRAR ESSE BOTÃO PQJÁ TEMOS UM ALI EM CIMA
-        # RoundedButton:
-        #     text: "Sair"
-        #     size_hint: None, None
-        #     size: 180, 90
-        #     pos_hint: {"center_x": .5,"center_y": 0.2}
-        #     on_release:app.stop()
+
             
 <TelaGerenciamento>:
     canvas.before:
@@ -144,12 +139,23 @@
             padding:50
             spacing: 20
             orientation: "horizontal"
-            RoundedButton:
-                text: "Cliente"
-                on_press: app.root.current = "telacli"
-            RoundedButton:
+            Button:
                 text: "Funcionario"
+                background_color: 0,0,0,0
                 on_press: app.root.current = "telafunc"
+                Image:
+                    source: "Imagens\empregado.png"
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    allow_stretch: True
+            Button:
+                text: "Cliente"
+                background_color: 0,0,0,0
+                on_press: app.root.current = "telacli"
+                Image:
+                    source: "Imagens\estacionamento.png"
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
 <TelaFunc>:
     canvas.before:
         Color:
@@ -186,19 +192,7 @@
                 Image:
                     source: "ListaPNG.png"
                     center_x: self.parent.center_x
-                    center_y: self.parent.center_y
-        # GridLayout:
-        #     cols: 3
-        #     spacing: 40
-        #     Label:
-        #         text: "Adicionar"
-        #         color: 'black'
-        #     Label:
-        #         text: "Deletar"
-        #         color: 'black'
-        #     Label:
-        #         text: "Listar"
-        #         color: 'black'          
+                    center_y: self.parent.center_y         
         GridLayout:
             cols: 3
             padding: 50
@@ -208,6 +202,7 @@
                 background_normal: ''
             RoundedButton:
                 text: 'Voltar'
+                size_hint: 0.3,0.05
                 on_press: app.root.current = "telag"  
             Button:
                 background_color: (0,0,0,0)
@@ -221,6 +216,7 @@
     email_inserir: email_inserir
     funcao_inserir: funcao_inserir
     turno_inserir: turno_inserir
+    acesso_inserir:acesso_inserir
     canvas.before:
         Color:
             rgba: (1,1,1,1)
@@ -263,12 +259,17 @@
         TextInput:
             id: turno_inserir
             multiline: False
-        Button:
+        Label:
+            text: 'Acesso ao Sistema'
+            color: "black"    
+        CheckBox:
+            id: acesso_inserir
+            
+        RoundedButton:
             text: "Confirmar"
-            color:
             on_press: root.enviarBD()
             on_release: Factory.PopupSucesso().open()
-        Button:
+        RoundedButton:
             text: "Cancelar"
             on_press: app.root.current="telafunc"
 
@@ -291,91 +292,99 @@
         TextInput:
             id: id_excluir
             multiline: False
-        Button:
+        RoundedButton:
             text: "Remover"
             color:
             on_press: root.deletarBD()
             on_release: Factory.PopupSucesso2().open()
-        Button:
+        RoundedButton:
             text: "Cancelar"
             on_press: app.root.current="telafunc"
 
 <TelaFuncListar>:
-    # # id_update: id_update
-    # # nome_update:nome_update
-    # # telefone_update:telefone_update
-    # # email_update:email_update
-    # # funcao_update:funcao_update
-    # # turno_update:turno_update
-    # canvas.before:
-    #     Color:
-    #         rgba: (1,1,1,1)
-    #     Rectangle:
-    #         pos:self.pos
-    #         size: self.size
-    # BoxLayout:
-    #     orientation:'vertical'
-    #     padding: 20
-    #     height: 25
-    #     GridLayout:
-    #         size_hint: 1, None
-    #         size_hint_y: None
-    #         height: 25
-    #         cols: 7
-    #         Label:
-    #             text: "ID"
-    #             color: "black"
-    #         Label:
-    #             text: "Tipo"
-    #             color: "black"
-    #         Label:
-    #             text: "Nome"
-    #             color: "black"
-    #         Label:
-    #             text: "CPF"
-    #             color: "black"
-    #         Label:
-    #             text: "Telefone"
-    #             color: "black"
-    #         Label:
-    #             text: "Email"
-    #             color: "black"
-    #     GridLayout:
-    #         size_hint: 1, None
-    #         size_hint_y: None
-    #         height: 25
-    #         cols: 6
-    #         Label:
-    #             text: "ID"
-    #         Label:
-    #             text: "Nome"
-    #         Label:
-    #             text: "Telefone"
-    #         Label:
-    #             text: "Função"
-    #         Label:
-    #             text: "Turno"
-    #         Label:
-    #             text: "Email"    
+    canvas.before:
+        Color:
+            rgba: (1,1,1,1)
+        Rectangle:
+            pos:self.pos
+            size: self.size
+    BoxLayout:
+        orientation:'vertical'
+        padding: 20
+        height: 25
+        GridLayout:
+            size_hint: 1, None
+            size_hint_y: None
+            height: 25
+            cols: 8
+            Label:
+                text: "ID"
+                color: "black"
+            Label:
+                text: "Nome"
+                color: "black"
+            Label:
+                text: "Telefone"
+                color: "black"     
+            Label:
+                text: "Função"
+                color: "black"
+            Label:
+                text: "Turno"
+                color: "black"
+            Label:
+                text: "Email"
+                color: "black"
+            Label:
+                text: "Acesso"
+                color: "black"
+            Label:
+                text: "Edit"
+                color: "black"
+        GridLayout:
+            size_hint: 1, None
+            size_hint_y: None
+            height: 25
+            cols: 8
+            Label:
+                text: "ID"
+            Label:
+                text: "Nome"
+            Label:
+                text: "Telefone"
+            Label:
+                text: "Função"
+            Label:
+                text: "Turno"
+            Label:
+                text: "Email"
+            Label:
+                text: "Acesso"
+            Label:
+                text: "Edit"
 
-    #     BoxLayout:
-    #         orientation: 'horizontal'
-    #         RecycleView:
-    #             viewclass: 'SelectableButton'
-    #             data: [{'text': str(x)} for x in root.data_items]
-    #             SelectableRecycleGridLayout:
-    #                 cols: 6
-    #                 default_size: None, dp(26)
-    #                 default_size_hint: 1, None
-    #                 size_hint_y: None
-    #                 height: self.minimum_height
-    #                 #orientation: 'vertical'
-    #                 multiselect: True
-    #                 touch_multiselect: True
+        BoxLayout:
+            orientation: 'horizontal'
+            RecycleView:
+                viewclass: 'SelectableButton'
+                data: [{'text': "Editar" if str(x) is 'Editar' else str(x)} for x in root.data_items]
+                SelectableRecycleGridLayout:
+                    cols: 8
+                    default_size: None, dp(26)
+                    default_size_hint: 1, None
+                    size_hint_y: None
+                    height: self.minimum_height
+                    #orientation: 'vertical'
+                    multiselect: True
+                    touch_multiselect: True
+            
+        RoundedButton:
+            text: "Voltar"
+            size_hint: 0.3, 0.3
+            pos_hint: {"center_x": 0.5}
+            on_press: app.root.current="telafunc"
 
-    Button:
-        text: "Cancelar"
-        on_press: app.root.current="telafunc"
+
 
 <TelaCli>:
     canvas.before:
@@ -424,6 +433,7 @@
                 background_normal: ''
             RoundedButton:
                 text: 'Voltar'
+                size_hint: 0.3,0.05
                 on_press: app.root.current = "telag"  
             Button:
                 background_color: (0,0,0,0)
@@ -480,11 +490,11 @@
             id: tipo_inserir
             text: 'Selecione'
             values:["Normal", "Vip"]    
-        Button:
+        RoundedButton:
             text: "Confirmar"
             on_press: root.enviarBDcli()
             on_release: Factory.PopupSucesso().open()
-        Button:
+        RoundedButton:
             text: "Cancelar"
             on_press: app.root.current="telacli"
 
@@ -507,43 +517,90 @@
         TextInput:
             id: id_excluir
             multiline: False
-        Button:
+        RoundedButton:
             text: "Remover"
-            on_press: root.deletarBD()
+            color:
+            on_press: root.deletarBDcli()
             on_release: Factory.PopupSucesso2().open()
-        Button:
+        RoundedButton:
             text: "Cancelar"
-            on_press: app.root.current="telacli"
+            on_press: app.root.current="telafunc"
 <TelaCliListar>:
+    canvas.before:
+        Color:
+            rgba: (1,1,1,1)
+        Rectangle:
+            pos:self.pos
+            size: self.size
+    BoxLayout:
+        orientation:'vertical'
+        padding: 20
+        height: 25
+        GridLayout:
+            size_hint: 1, None
+            size_hint_y: None
+            height: 25
+            cols: 7
+            Label:
+                text: "ID"
+                color: "black"
+            Label:
+                text: "Tipo de Cliente"
+                color: "black"
+            Label:
+                text: "Nome"
+                color: "black"
+            Label:
+                text: "CPF"
+                color: "black"     
+            Label:
+                text: "Telefone"
+                color: "black"
+            Label:
+                text: "Email"
+                color: "black"
+            Label:
+                text: "Edit"
+                color: "black"
+        GridLayout:
+            size_hint: 1, None
+            size_hint_y: None
+            height: 25
+            cols: 7
+            Label:
+                text: "ID"
+            Label:
+                text: "Tipo de Cliente"
+            Label:
+                text: "Nome"
+            Label:
+                text: "CPF"
+            Label:
+                text: "Telefone"
+            Label:
+                text: "Email"
+            Label:
+                text: "Edit"
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        BoxLayout:
+            orientation: 'horizontal'
+            RecycleView:
+                viewclass: 'SelectableButton'
+                data: [{'text': "Editar" if str(x) is 'Editar' else str(x)} for x in root.data_items]
+                SelectableRecycleGridLayout:
+                    cols: 7
+                    default_size: None, dp(26)
+                    default_size_hint: 1, None
+                    size_hint_y: None
+                    height: self.minimum_height
+                    multiselect: True
+                    touch_multiselect: True
+                    
+        RoundedButton:
+            text: "Voltar"
+            size_hint: 0.3, 0.3
+            pos_hint: {"center_x": 0.5}
+            on_press: app.root.current="telacli"
 
 
 <SelectableButton>:

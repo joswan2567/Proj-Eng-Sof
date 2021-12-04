@@ -2,11 +2,11 @@ DB_HOST ="ec2-3-227-149-67.compute-1.amazonaws.com"
 DB_NAME ="d3gdajkts88rvi"
 DB_USER = "gdujgklsirqyxl"
 DB_PASS = "587450b087c81af774131650ffa95e0b47793242ab89bb2adac05d4b8b46491e"
+from kivy.app import App
 import psycopg2
 import psycopg2.extras
 conn = psycopg2.connect(host = DB_HOST, database = DB_NAME, user = DB_USER, password = DB_PASS, port = "5432")
 
-from kivy.app import App
 from kivy.properties import ObjectProperty
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
@@ -17,10 +17,61 @@ from kivy.uix.recyclegridlayout import RecycleGridLayout
 from kivy.uix.recycleview.layout import LayoutSelectionBehavior
 from kivy.uix.recycleview import RecycleView
 from kivy.uix.behaviors import FocusBehavior
+from kivy.uix.button import Button
+from kivy.uix.image import Image
+
 
 from kivy.uix.boxlayout import BoxLayout
 
+class SelectableRecycleGridLayout(FocusBehavior, LayoutSelectionBehavior,
+                                  RecycleGridLayout):
+    ''' Adds selection and focus behaviour to the view. '''
 
+class SelectableButton(RecycleDataViewBehavior, Button):
+    ''' Add selection support to the Button '''
+    index = None
+    selected = BooleanProperty(False)
+    selectable = BooleanProperty(True)
+
+    def __init__(self, **kwargs):
+        super(SelectableButton, self).__init__(**kwargs)
+        # print(self.text)
+        # if self.text is "Editar":
+        #     self.text = ""
+        #     img = Image(source="ListaPNG.png")
+        #     self.append(img)
+        pass
+
+    # def _do_release(self, *args):
+    #     print(self.text)
+    #     if self.text is "Editar":
+    #         self.text = ""
+    #         img = Image(source="ListaPNG.png")
+    #         self.append(img)
+    #     return super()._do_release(*args)
+        
+    def refresh_view_attrs(self, rv, index, data):
+        ''' Catch and handle the view changes '''
+        self.index = index
+        return super(SelectableButton, self).refresh_view_attrs(rv, index, data)
+
+    def on_touch_down(self, touch):
+        ''' Add selection on touch down '''
+        if super(SelectableButton, self).on_touch_down(touch):
+            return True
+        if self.collide_point(*touch.pos) and self.selectable:
+            return self.parent.select_with_touch(self.index, touch)
+
+    def apply_selection(self, rv, index, is_selected):
+        ''' Respond to the selection of items in the view. '''
+        self.selected = is_selected
+
+    # def on_press(self):
+    #     # popup = TextInputPopup(self)
+    #     # popup.open()
+
+    def update_changes(self, txt):
+        self.text = txt
 
 class Gerenciador(ScreenManager):
     def autenticarLogin(self,p,login,senha):
@@ -68,10 +119,14 @@ class TelaFuncCadastro(Screen):
         email_inserir= self.email_inserir.text
         funcao_inserir= self.funcao_inserir.text
         turno_inserir= self.turno_inserir.text
+        # acesso_inserir =  self.checkbox.text
+        # print(nome_inserir + telefone_inserir + email_inserir + funcao_inserir + turno_inserir+acesso_inserir)
         print(nome_inserir + telefone_inserir + email_inserir + funcao_inserir + turno_inserir)
         with conn:
             with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
-                cur.execute("INSERT INTO funcionario (nome,telefone,funcao,turno,email) VALUES (%s,%s,%s,%s,%s)",(nome_inserir,telefone_inserir,funcao_inserir,turno_inserir,email_inserir) )
+                # cur.execute("INSERT INTO funcionario (nome,telefone,funcao,turno,email,acesso) VALUES (%s,%s,%s,%s,%s,%s)",(nome_inserir,telefone_inserir,funcao_inserir,turno_inserir,email_inserir,acesso_inserir) )
+                cur.execute("INSERT INTO funcionario (nome,telefone,funcao,turno,email,acesso) VALUES (%s,%s,%s,%s,%s)",(nome_inserir,telefone_inserir,funcao_inserir,turno_inserir,email_inserir) )
+
             conn.close
         pass
     pass
@@ -87,60 +142,46 @@ class TelaFuncExcluir(Screen):
         pass
     pass
 
-
-
-    # def buscar(self, value):
-    #     connection = conn
-    #     cursor = connection.cursor()
-    #     cursor.execute("SELECT * FROM public.cliente WHERE nome LIKE '%" + value + "%'")
-    #     rows = cursor.fetchall()
-    #     self.data_items = []
-    #     if len(rows) > 1:
-    #         for row in rows:
-    #             for col in row:
-    #                 self.data_items.append(col)
-    #     else:
-    #         self.data_items.append("Não há dados compatíveis")
-    #     print(self.data_items)
-
 class TelaFuncListar(Screen):
-    # data_items = ListProperty([])
+    data_items = ListProperty([])
 
-    # def __init__(self, **kwargs):
-    #     super(TelaFuncListar, self).__init__(**kwargs)
-    #     self.get_users()
-    #     pass
+    def __init__(self, **kwargs):
+        super(TelaFuncListar, self).__init__(**kwargs)
+        self.get_users()
+        pass
 
-    # def get_users(self):
-    #     connection = conn
-    #     cursor = connection.cursor()
+    def get_users(self):
+        connection = conn
+        cursor = connection.cursor()
 
-    #     cursor.execute("SELECT * FROM public.funcionario ORDER BY id_funcionario ASC")
-    #     rows = cursor.fetchall()
-    #     print(rows)
-    #     for row in rows:
-    #         for col in row:
-    #             self.data_items.append(col)
-    #     pass
+        cursor.execute("SELECT * FROM public.funcionario ORDER BY id_funcionario ASC")
+        rows = cursor.fetchall()
+        print(rows)
+        for row in rows:
+            for col in row:
+                self.data_items.append(col)
+            self.data_items.append("Editar")
+        pass
 
-    # def cd(self):  
-    #     self.clear_widgets()
-    #     TelaFuncListar().run()
+    def cd(self):  
+        self.clear_widgets()
+        TelaFuncListar().run()
 
-    # title = "Funcionarios"
-    # def build(self):
-    pass    
+    title = "Funcionarios"
+    def build(self):
+        pass    
 
 class TelaCli(Screen):
     pass
 class TelaCliCadastro(Screen):
     def enviarBDcli(self):
+        print("funcao enviarBDcliente")
         nome_inserir = self.nome_inserir.text
         telefone_inserir= self.telefone_inserir.text
         email_inserir= self.email_inserir.text
         cpf_inserir= self.cpf_inserir.text
         tipo_inserir= 1 if self.tipo_inserir.text == "Normal" else 2
-        print(nome_inserir + telefone_inserir + email_inserir + cpf_inserir + tipo_inserir)
+        print(nome_inserir + telefone_inserir + email_inserir + cpf_inserir)
         if nome_inserir != "":   
             with conn:
                 with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
@@ -149,8 +190,44 @@ class TelaCliCadastro(Screen):
         pass
     pass
 class TelaCliExcluir(Screen):
+    def deletarBDcli(self):
+        id_excluir = self.id_excluir.text
+        print(id_excluir)
+        with conn:
+          with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
+                cur.execute("DELETE FROM public.cliente WHERE id_cliente = %s",(id_excluir,))                
+          conn.close
+        pass
+    pass
     pass
 class TelaCliListar(Screen):
+    data_items = ListProperty([])
+
+    def __init__(self, **kwargs):
+        super(TelaCliListar, self).__init__(**kwargs)
+        self.get_users()
+        pass
+
+    def get_users(self):
+        connection = conn
+        cursor = connection.cursor()
+
+        cursor.execute("SELECT * FROM public.cliente ORDER BY id_cliente ASC")
+        rows = cursor.fetchall()
+        print(rows)
+        for row in rows:
+            for col in row:
+                self.data_items.append(col)
+            self.data_items.append("Editar")
+        pass
+
+    def cd(self):  
+        self.clear_widgets()
+        TelaCliListar().run()
+
+    title = "Funcionarios"
+    def build(self):
+        pass    
     pass
 
 class principalApp(App): 
