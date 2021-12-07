@@ -10,6 +10,118 @@
             size: self.size  
             pos: self.pos
             radius: [50]
+<TelaCliListar>:
+    id: telaclilistar
+    canvas.before:
+        Color:
+            rgba: (1,1,1,1)
+        Rectangle:
+            pos:self.pos
+            size: self.size
+    BoxLayout:
+        orientation:'horizontal'
+
+        BoxLayout:
+            orientation:'vertical'
+
+            GridLayout:
+                size_hint: 1, None
+                size_hint_y: None
+                height: 25
+                cols: 6
+                Label:
+                    text: "ID"
+                Label:
+                    text: "Tipo"
+                Label:
+                    text: "Nome"
+                Label:
+                    text: "CPF"
+                Label:
+                    text: "Telefone"
+                Label:
+                    text: "Email"    
+                Label:
+                #     text: "Editar"    
+                # Label:
+                #     text: "Deletar"    
+
+            BoxLayout:
+                orientation: 'horizontal'
+                RecycleView:
+                    id: lt
+                    viewclass: 'SelectableButton'
+                    data: [{'text': str(x)} for x in root.data_items]
+                    SelectableRecycleGridLayout:
+                        cols: 6
+                        default_size: None, dp(26)
+                        default_size_hint: 1, None
+                        size_hint_y: None
+                        height: self.minimum_height
+                        #orientation: 'vertical'
+                        multiselect: True
+                        touch_multiselect: True
+        BoxLayout:
+            orientation:'vertical'
+
+            GridLayout:
+                size_hint: 1, None
+                size_hint_y: None
+                height: 25
+                cols: 2
+                Label:
+                    text: "Editar"
+                    size_hint: .5, 1
+                Label:
+                    text: "Deletar"
+                    size_hint: .5, 1
+            RecycleView:
+                id: bt_act
+                viewclass: 'ButtonActions'
+                data: [{'id': x } for x in range(int(len(root.data_items)/6))]
+                SelectableRecycleGridLayout:
+                    cols: 1
+                    default_size: None, dp(26)
+                    default_size_hint: 1, None
+                    size_hint_y: None
+                    height: self.minimum_height
+                    #orientation: 'vertical'
+                    multiselect: True
+                    touch_multiselect: True
+        RoundedButton:
+            text: "Voltar"
+            size_hint: 0.3, 0.3
+            pos_hint: {"center_x": 0.5}
+            on_press: app.root.current="telacli"
+
+<ButtonActions>:
+    # size: '100dp','100dp'
+    size: 200,100
+    size_hint: None, None
+    Button:
+        size_hint: .2, 1
+        text: ""
+        color:
+        on_press: 
+            # print(f'dados: ${app.root.data_items[root.id*6:(root.id*6)+6]} id:${root.id}')
+            root.edit(root.id*6)
+        Image:
+            source: "../../assets/icons/edit1.png"
+            center_x: self.parent.center_x
+            center_y: self.parent.center_y
+
+    Button:
+        size_hint: 0.2, 1
+        text: ""
+        color:
+        on_press: 
+            # print(f'dados: ${app.root.data_items[root.id*6:(root.id*6)+6]} id:${root.id}')
+            root.delete(app.root.ids.telaclilistar)
+
+        Image:
+            source: "../../assets/icons/delete1.png"
+            center_x: self.parent.center_x
+            center_y: self.parent.center_y
 
 <LoginButton@Button>
     font_size:18
@@ -78,6 +190,64 @@
         on_release: root.dismiss()
 
 
+<TextInputPopup>:
+    title: "Editar"
+    size_hint: None, None
+    size: 300, 500
+    auto_dismiss: False
+
+    BoxLayout:
+        orientation: "vertical"
+        BoxLayout:
+            orientation:'horizontal'
+            Label:
+                text: "ID"
+                color:
+            Label:
+                text: str(root.id)
+                color:
+        Label:
+            text: "Nome"
+            color:
+        TextInput:
+            id: nome
+            text: root.nome
+        Label:
+            text: "Telefone"
+            color:
+        TextInput:
+            id: telefone
+            text: root.telefone
+        Label:
+            text: "CPF"
+            color:
+        TextInput:
+            id: cpf
+            text: root.cpf
+        Label:
+            text: "Email"
+            color:
+        TextInput:
+            id: email
+            text: root.email        
+        BoxLayout:
+            orientation:'horizontal'
+            Button:
+                size_hint: 1, 1
+                text: "Salvar"
+                on_release:
+                    root.nome = nome.text
+                    root.telefone = telefone.text
+                    root.cpf = cpf.text
+                    root.email = email.text
+                    root.save(app.root.ids.telaclilistar)
+                    root.dismiss()
+            Button:
+                size_hint: 1, 1
+                text: "Cancelar"
+                on_release: root.dismiss()
+
+
 <Gerenciador>
     TelaPrincipal:
         name: "telaPrincipal"
@@ -88,6 +258,7 @@
     TelaCliExcluir:
         name: "telacliexclu"
     TelaCliListar:
+        id: telaclilistar
         name: "telaclilista"    
     TelaFunc:
         name: "telafunc"
@@ -535,121 +706,6 @@
         RoundedButton:
             text: "Cancelar"
             on_press: app.root.current="telafunc"
-<TelaCliListar>:
-    canvas.before:
-        Color:
-            rgba: (1,1,1,1)
-        Rectangle:
-            pos:self.pos
-            size: self.size
-    BoxLayout:
-        orientation:'horizontal'
-
-        BoxLayout:
-            orientation:'vertical'
-
-            GridLayout:
-                size_hint: 1, None
-                size_hint_y: None
-                height: 25
-                cols: 6
-                Label:
-                    text: "ID"
-                Label:
-                    text: "Tipo"
-                Label:
-                    text: "Nome"
-                Label:
-                    text: "CPF"
-                Label:
-                    text: "Telefone"
-                Label:
-                    text: "Email"    
-                Label:
-                #     text: "Editar"    
-                # Label:
-                #     text: "Deletar"    
-
-            BoxLayout:
-                orientation: 'horizontal'
-                RecycleView:
-                    id: lt
-                    viewclass: 'SelectableButton'
-                    data: [{'text': str(x)} for x in root.data_items]
-                    SelectableRecycleGridLayout:
-                        cols: 6
-                        default_size: None, dp(26)
-                        default_size_hint: 1, None
-                        size_hint_y: None
-                        height: self.minimum_height
-                        #orientation: 'vertical'
-                        multiselect: True
-                        touch_multiselect: True
-        BoxLayout:
-            orientation:'vertical'
-
-            GridLayout:
-                size_hint: 1, None
-                size_hint_y: None
-                height: 25
-                cols: 2
-                Label:
-                    text: "Editar"
-                    size_hint: .5, 1
-                Label:
-                    text: "Deletar"
-                    size_hint: .5, 1
-            RecycleView:
-                id: bt_act
-                viewclass: 'ButtonActions'
-                data: [{'id': x } for x in range(int(len(root.data_items)/6))]
-                SelectableRecycleGridLayout:
-                    cols: 1
-                    default_size: None, dp(26)
-                    default_size_hint: 1, None
-                    size_hint_y: None
-                    height: self.minimum_height
-                    #orientation: 'vertical'
-                    multiselect: True
-                    touch_multiselect: True
-        RoundedButton:
-            text: "Voltar"
-            size_hint: 0.3, 0.3
-            pos_hint: {"center_x": 0.5}
-            on_press: app.root.current="telacli"
-
-<ButtonActions>:
-    # size: '100dp','100dp'
-    size: 200,100
-    size_hint: None, None
-    Button:
-        size_hint: .2, 1
-        text: ""
-        color:
-        on_press: 
-            # print(f'dados: ${app.root.data_items[root.id*6:(root.id*6)+6]} id:${root.id}')
-            root.edit(root.id*6)
-        Image:
-            source: "../../assets/icons/edit1.png"
-            center_x: self.parent.center_x
-            center_y: self.parent.center_y
-
-    Button:
-        size_hint: 0.2, 1
-        text: ""
-        color:
-        on_press: 
-            # print(f'dados: ${app.root.data_items[root.id*6:(root.id*6)+6]} id:${root.id}')
-            root.delete(root.id*6,app.root)
-
-        Image:
-            source: "../../assets/icons/delete1.png"
-            center_x: self.parent.center_x
-            center_y: self.parent.center_y
-
-    
-
-
 <TelaPagamento>:
     GridLayout:
         cols: 3

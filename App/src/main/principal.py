@@ -84,10 +84,12 @@ class Gerenciador(ScreenManager):
         cs.execute("SELECT * FROM Login l WHERE  l.login LIKE \'" + str(login) + "\' AND l.senha like \'" + str(senha) + "\' ORDER BY l.id_login ASC")
         senha_bd = cs.fetchall()
         
+        # p.dismiss()
+        # self.current = "telag"
+
         if len(senha_bd) > 0:
 
             print(senha_bd)
-            self.current = "telag"
             p.dismiss()
 
             #print(p.ids)
@@ -232,8 +234,6 @@ class TelaCliListar(Screen):
     def build(self):
         pass    
     pass
-
-
 class TextInputPopup(Popup):
     obj = ObjectProperty(None)
     id = StringProperty("")
@@ -255,23 +255,12 @@ class TextInputPopup(Popup):
         self.email = str(obj.data[5])
     
     def save(self, lt):
-        idx = int(self.id) - 1
-        dt_items[idx] = self.id
-        dt_items[idx+1] = self.id_cliente
-        dt_items[idx+2] = self.nome
-        dt_items[idx+3] = self.telefone
-        dt_items[idx+4] = self.cpf
-        dt_items[idx+5] = self.email
-        # lt.data_items = dt_items
-        # lt.ids.lt.refresh_from_data()
+        with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
+            cur.execute("UPDATE cliente SET (nome,telefone,cpf,email) = (%s,%s,%s,%s) WHERE id_cliente = %s", (self.nome, self.telefone, self.cpf, self.email, self.id))
+        conn.close 
         lt.get_users()
         lt.ids.lt.refresh_from_data()
         lt.ids.bt_act.refresh_from_data()
-        with conn:
-            with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
-                cur.execute("UPDATE cliente SET (nome,telefone,cpf,email) = (%s,%s,%s,%s) WHERE id_cliente = %s", (self.nome, self.telefone, self.cpf, self.email, self.id))
-            conn.close 
-
   
 class ButtonActions(BoxLayout):
     data = []
@@ -280,16 +269,14 @@ class ButtonActions(BoxLayout):
         popup = TextInputPopup(self)
         popup.open()
 
-    def delete(self, init, lt):
-        self.data = list(dt_items[init:init+6])
-        print(self.data)
-        idx = self.data[0]
-        with conn:
-            with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
-                cur.execute("DELETE FROM cliente WHERE id_cliente = %s", (str(idx) ))
-        conn.close
-        # del dt_items[(idx - 1) * 6: ((idx - 1) * 6) + 6]
-        # lt.data_items = dt_items
+    def delete(self, lt):
+        print(self.id+1)
+        id = str(self.id+1)
+        # with conn:
+        #     with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
+        #         # cur.execute("DELETE FROM cliente WHERE id_cliente = %s", (id))
+        #         # cur.execute("SELECT * FROM calc_bol(1)")
+        # conn.close
         lt.get_users()
         lt.ids.lt.refresh_from_data()
         lt.ids.bt_act.refresh_from_data()
