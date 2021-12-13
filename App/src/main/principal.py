@@ -85,6 +85,7 @@ class Gerenciador(ScreenManager):
         senha_bd = cs.fetchall()
         
         # p.dismiss()
+        
 
         if len(senha_bd) > 0:
 
@@ -115,6 +116,7 @@ class TelaFunc(Screen):
     pass
 
 class TelaPagamento(Screen):
+
     pass
 
 class TelaFuncCadastro(Screen):
@@ -272,6 +274,25 @@ class ButtonActions(BoxLayout):
     def delete(self, lt):
         print(self.id+1)
         id = str(self.id+1)
+        with conn:
+            with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
+                cur.execute("DELETE FROM cliente WHERE id_cliente = %s", (id))
+                cur.execute("SELECT * FROM calc_bol(1)")
+        conn.close
+        lt.get_users()
+        lt.ids.lt.refresh_from_data()
+        lt.ids.bt_act.refresh_from_data()
+  
+class ButtonActionsFunc(BoxLayout):
+    data = []
+    def edit(self, init):
+        self.data = list(dt_items[init:init+6])
+        popup = TextInputPopup(self)
+        popup.open()
+
+    def delete(self, lt):
+        print(self.id+1)
+        id = str(self.id+1)
         # with conn:
         #     with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
         #         # cur.execute("DELETE FROM cliente WHERE id_cliente = %s", (id))
@@ -280,7 +301,7 @@ class ButtonActions(BoxLayout):
         lt.get_users()
         lt.ids.lt.refresh_from_data()
         lt.ids.bt_act.refresh_from_data()
-  
+
 
 class principalApp(App): 
     def build(self):
