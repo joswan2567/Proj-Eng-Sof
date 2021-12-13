@@ -85,11 +85,11 @@ class Gerenciador(ScreenManager):
         senha_bd = cs.fetchall()
         
         # p.dismiss()
-        # self.current = "telag"
 
         if len(senha_bd) > 0:
 
             print(senha_bd)
+            self.current = "telag"
             p.dismiss()
 
             #print(p.ids)
