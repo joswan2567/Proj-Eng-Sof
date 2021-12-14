@@ -120,6 +120,64 @@
         font_size: 15
         on_release: root.dismiss()
 
+<PopupBoleto>:
+    title: "Boleto"
+    size_hint: None, None
+    size: 300, 500
+    auto_dismiss: False
+
+    BoxLayout:
+        orientation: "vertical"
+        BoxLayout:
+            orientation:'horizontal'
+            Label:
+                text: "Número da Vaga"
+                color:
+            Label:
+                text: str(root.nmr_vg)
+                color: 
+        BoxLayout:
+            orientation:'horizontal'
+            Label:
+                text: "Entrada da Vaga"
+                color:
+            Label:
+                text: str(root.entrada)
+                color:
+        BoxLayout:
+            orientation:'horizontal'
+            Label:
+                text: "Saida da Vaga"
+                color:
+            Label:
+                text: str(root.saida)
+                color:  
+        BoxLayout:
+            orientation:'horizontal'
+            Label:
+                text: "Total Boleto"
+                color:
+            Label:
+                text: str(root.total)
+                color:   
+        BoxLayout:
+            orientation:'horizontal'
+            Button:
+                size_hint: 1, 1
+                text: "Imprimir"
+                on_release:
+                #     root.nome = nome.text
+                #     root.telefone = telefone.text
+                #     root.cpf = cpf.text
+                #     root.email = email.text
+                #     root.save(app.root.ids.telaclilistar)
+                    root.dismiss()
+            Button:
+                size_hint: 1, 1
+                text: "Sair"
+                on_release: root.dismiss()
+
+
 
 <TextInputPopup>:
     title: "Editar"
@@ -754,82 +812,88 @@
 
 
 <TelaPagamento>:
-    # id:boleto
-    # canvas.before:
-    #     Color:
-    #         rgba: (1,1,1,1)
-    #     Rectangle:
-    #         pos:self.pos
-    #         size: self.size
+    id:boleto
+    canvas.before:
+        Color:
+            rgba: (1,1,1,1)
+        Rectangle:
+            pos:self.pos
+            size: self.size
     
-    # BoxLayout:
-    #     orientation:'vertical'
-    #     GridLayout:
-    #         cols:4
-    #         Label:
-    #             text: "ID Vaga"
-    #             color: 'black'
-    #         Label:
-    #             text: "Numero da Vaga"
-    #             color: 'black'
-    #         Label:
-    #             text: "Tipo Cliente"
-    #             color: 'black'
-    #         Label:
-    #             text: "Status"
-    #             color: 'black'
-    #     BoxLayout:
-    #         orientation: 'horizontal'
-    #         RecycleView:
-    #             id: lt_pagamento
-    #             viewclass: 'SelectableButton'
-    #             data: [{'text': str(x)} for x in root.data_items]
-    #             SelectableRecycleGridLayout:
-    #                 cols: 4
-    #                 default_size: None, dp(26)
-    #                 default_size_hint: 1, None
-    #                 size_hint_y: None
-    #                 height: self.minimum_height
-    #                 #orientation: 'vertical'
-    #                 multiselect: True
-    #                 touch_multiselect: True
-    #     BoxLayout:
-    #         orientation:'horizontal'
-    #         padding: 50
-    #         spacing: 10
-    #         Label:
-    #             text:'Insira o ID da vaga'
-    #             color: 'black'
-    #         TextInput:
-    #             id: vgtxt
-    #             multiline: False
-    #     GridLayout:
-    #         cols: 5
-    #         Button:
-    #             background_color: (0,0,0,0)
-    #             background_normal: ''
-    #         RoundedButton:
-    #             text: 'Voltar'
-    #             size_hint: 0.3,0.05
-    #             on_press: app.root.current = "telag" 
+    BoxLayout:
+        orientation:'vertical'
+        GridLayout:
+            cols:6
+            Label:
+                text: "ID Vaga"
+                color: 'black'
+            Label:
+                text: "Numero da Vaga"
+                color: 'black'
+            Label:
+                text: "Placa Carro"
+                color: 'black'
+            Label:
+                text: "Cliente"
+                color: 'black'
+            Label:
+                text: "Entrada"
+                color: 'black'
+            Label:
+                text: "Saida"
+                color: 'black'
+        BoxLayout:
+            orientation: 'horizontal'
+            RecycleView:
+                id: lt_pagamento
+                viewclass: 'SelectableButton'
+                data: [{'text': str(x)} for x in root.dt_it]
+                SelectableRecycleGridLayout:
+                    cols: 6
+                    default_size: None, dp(26)
+                    default_size_hint: 1, None
+                    size_hint_y: None
+                    height: self.minimum_height
+                    #orientation: 'vertical'
+                    multiselect: True
+                    touch_multiselect: True
+        BoxLayout:
+            orientation:'horizontal'
+            padding: 50
+            spacing: 10
+            Label:
+                text:'Insira o ID da vaga'
+                color: 'black'
+            TextInput:
+                id: vgtxt
+                multiline: False
+        GridLayout:
+            cols: 5
+            Button:
+                background_color: (0,0,0,0)
+                background_normal: ''
+            RoundedButton:
+                text: 'Voltar'
+                size_hint: 0.3,0.05
+                on_press: app.root.current = "telag" 
                     
 
-    #         Button:
-    #             background_color: (0,0,0,0)
-    #             background_normal: ''
-    #         Button:
-    #             text: 'Gerar Valor'
-    #             background_color: 0,0,0,0
-    #             size_hint: 0.3,0.05
-    #             on_press: root.gerar_valor()
-    #             Image:
-    #                 source: "Imagens/check.png"
-    #                 center_x: self.parent.center_x
-    #                 center_y: self.parent.center_y
-    #                 allow_stretch: True
-    #         Button:
-    #             background_color: (0,0,0,0)
-    #             background_normal: ''  
+            Button:
+                background_color: (0,0,0,0)
+                background_normal: ''
+            Button:
+                text: 'Gerar Valor'
+                background_color: 0,0,0,0
+                size_hint: 0.3,0.05
+                on_press: root.gerar_valor(vgtxt.text, lt_pagamento)
+                Image:
+                    source: "Imagens/check.png"
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    allow_stretch: True
+            Button:
+                background_color: (0,0,0,0)
+                background_normal: ''  
 <SelectableButton>:
     canvas.before:
         Color:

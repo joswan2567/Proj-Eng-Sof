@@ -109,9 +109,69 @@ class TelaGerenciamento(Screen):
 class TelaFunc(Screen):
     pass
 
+class PopupBoleto(Popup):
+    obj = ObjectProperty(None)
+    total = StringProperty("")
+    nmr_vg = StringProperty("")
+    entrada = StringProperty("")
+    saida = StringProperty("")
+
+    def __init__(self, obj, **kw):
+        super(PopupBoleto, self).__init__(**kw)
+        self.obj = obj
+        self.nmr_vg = str(obj[0])
+        self.entrada = str(obj[2])
+        self.saida = str(obj[3])
+        self.total = str(obj[4])
 class TelaPagamento(Screen):
 
-    pass
+    dt_it = []
+
+    def __init__(self, **kw):
+        super().__init__(**kw)
+        self.get_vgs_ocup()
+        pass
+
+    def get_vgs_ocup(self):
+        connection = conn
+        cursor = connection.cursor()
+        try:
+            cursor.execute(
+                "SELECT vc.id_vaga, v.numero, c.placa, cl.nome, vc.entrada, vc.saida "
+                "FROM vaga_cliente vc "
+                "INNER JOIN vaga v ON v.id_vaga = vc.id_vaga_cliente "
+                "INNER JOIN carro c ON c.id_carro = vc.id_carro_cliente "
+                "INNER JOIN carro_cliente cc ON cc.id_carro_cliente = c.id_carro "
+                "INNER JOIN cliente cl ON cl.id_cliente = cc.id_cliente "
+                "WHERE vc.status LIKE 'Aberta' "
+                "ORDER BY vc.id_vaga ASC");
+            connection.commit()
+            rows = cursor.fetchall()
+            print(rows)
+            for row in rows:
+                for col in row:
+                    self.dt_it.append(col)
+            print(self.dt_it)
+        except :
+            print('Error Req')
+
+    def gerar_valor(self, id_vaga, tabela):
+        connection = conn
+        cursor = connection.cursor()
+        # try:
+        cursor.execute(
+            "SELECT * from calc_bol(%s)", str(id_vaga));
+        connection.commit()
+        rows = cursor.fetchall()
+        print(list(rows[0]))
+        popup = PopupBoleto(list(rows[0]))
+        popup.open()
+        self.get_vgs_ocup()
+        tabela.refresh_from_data()
+
+        # except:
+        #     print('Error Req')
+
 
 class TelaFuncCadastro(Screen):
     def enviarBD(self):
