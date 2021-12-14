@@ -78,21 +78,21 @@ class SelectableButton(RecycleDataViewBehavior, Button):
 class Gerenciador(ScreenManager):
     def autenticarLogin(self,p,login,senha):
         
-        p.dismiss()
-        self.current = "telag"
-        # print(login+senha)
-        # cs = conn.cursor()
-        # cs.execute("SELECT * FROM Login l WHERE  l.login LIKE \'" + str(login) + "\' AND l.senha like \'" + str(senha) + "\' ORDER BY l.id_login ASC")
-        # senha_bd = cs.fetchall()        
+        # p.dismiss()
+        # self.current = "telag"
+        print(login+senha)
+        cs = conn.cursor()
+        cs.execute("SELECT * FROM Login l WHERE  l.login LIKE \'" + str(login) + "\' AND l.senha like \'" + str(senha) + "\' ORDER BY l.id_login ASC")
+        senha_bd = cs.fetchall()        
 
-        # if len(senha_bd) > 0:
+        if len(senha_bd) > 0:
 
-        #     print(senha_bd)
-        #     self.current = "telag"
-        # else:
+            print(senha_bd)
+            self.current = "telag"
+        else:
             
-        #     p.ids.usuario.text = ""
-        #     p.ids.senha.text = ""
+            p.ids.usuario.text = ""
+            p.ids.senha.text = ""
             
         
     pass
