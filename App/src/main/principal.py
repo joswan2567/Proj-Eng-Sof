@@ -77,28 +77,22 @@ class SelectableButton(RecycleDataViewBehavior, Button):
 
 class Gerenciador(ScreenManager):
     def autenticarLogin(self,p,login,senha):
-        #login = self.login.text
-        #senha = self.senha.text
-        print(login+senha)
-        cs = conn.cursor()
-        cs.execute("SELECT * FROM Login l WHERE  l.login LIKE \'" + str(login) + "\' AND l.senha like \'" + str(senha) + "\' ORDER BY l.id_login ASC")
-        senha_bd = cs.fetchall()
         
-        # p.dismiss()
-        
+        p.dismiss()
+        self.current = "telag"
+        # print(login+senha)
+        # cs = conn.cursor()
+        # cs.execute("SELECT * FROM Login l WHERE  l.login LIKE \'" + str(login) + "\' AND l.senha like \'" + str(senha) + "\' ORDER BY l.id_login ASC")
+        # senha_bd = cs.fetchall()        
 
-        if len(senha_bd) > 0:
+        # if len(senha_bd) > 0:
 
-            print(senha_bd)
-            self.current = "telag"
-            p.dismiss()
-
-            #print(p.ids)
-            #self.ids.login_pop.dismiss()
-        else:
+        #     print(senha_bd)
+        #     self.current = "telag"
+        # else:
             
-            p.ids.usuario.text = ""
-            p.ids.senha.text = ""
+        #     p.ids.usuario.text = ""
+        #     p.ids.senha.text = ""
             
         
     pass
@@ -219,7 +213,7 @@ class TelaCliListar(Screen):
         connection = conn
         cursor = connection.cursor()
 
-        cursor.execute("SELECT * FROM public.cliente ORDER BY id_cliente ASC")
+        cursor.execute("SELECT c.id_cliente, c.id_tipo_cliente, c.nome, c.cpf, c.telefone, c.email FROM public.cliente c WHERE c.deletado = false ORDER BY id_cliente ASC")
         rows = cursor.fetchall()
         # print(rows)
         # create data_items
@@ -257,12 +251,28 @@ class TextInputPopup(Popup):
         self.email = str(obj.data[5])
     
     def save(self, lt):
-        with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
-            cur.execute("UPDATE cliente SET (nome,telefone,cpf,email) = (%s,%s,%s,%s) WHERE id_cliente = %s", (self.nome, self.telefone, self.cpf, self.email, self.id))
-        conn.close 
-        lt.get_users()
-        lt.ids.lt.refresh_from_data()
-        lt.ids.bt_act.refresh_from_data()
+        try:
+            with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
+                print(self.id)
+                print(self.id_cliente)
+                print(self.nome)
+                print(self.telefone)
+                print(self.cpf)
+                print(self.email)
+                cur.execute(
+                    "UPDATE cliente c " 
+                    "SET (nome,telefone,cpf,email) = (%s,%s,%s,%s) " 
+                    "WHERE c.id_cliente = %s", 
+                    (self.nome, self.telefone, self.cpf, self.email, self.id));
+                conn.commit()
+            conn.close
+            lt.get_users()
+            lt.ids.lt_cliente.refresh_from_data()
+            lt.ids.bt_act_cliente.refresh_from_data()
+        except psycopg2.Error as e:
+            print('Error banco :' + str(e))
+        # print(lt)
+        self.dismiss()
   
 class ButtonActions(BoxLayout):
     data = []
@@ -272,16 +282,22 @@ class ButtonActions(BoxLayout):
         popup.open()
 
     def delete(self, lt):
-        print(self.id+1)
-        id = str(self.id+1)
-        with conn:
-            with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
-                cur.execute("DELETE FROM cliente WHERE id_cliente = %s", (id))
-                cur.execute("SELECT * FROM calc_bol(1)")
-        conn.close
-        lt.get_users()
-        lt.ids.lt.refresh_from_data()
-        lt.ids.bt_act.refresh_from_data()
+        id = str(lt.ids.telaclilistar.data_items[self.id * 6])
+        print(id)
+        print(lt.ids.telaclilistar.data_items)
+        try:
+            with conn:
+                with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
+                    cur.execute("UPDATE cliente c SET deletado = true WHERE c.id_cliente = (%s)", (id))
+                    # cur.execute("SELECT * FROM calc_bol(1)")
+            conn.close
+            lt.ids.telaclilistar.get_users()
+            print(lt)
+            print(lt.ids.telaclilistar.ids)
+            lt.ids.telaclilistar.ids.lt_cliente.refresh_from_data()
+            lt.ids.telaclilistar.ids.bt_act_cliente.refresh_from_data()
+        except psycopg2.Error as e:
+            print('Erro banco: ' + str(e))
   
 class ButtonActionsFunc(BoxLayout):
     data = []
