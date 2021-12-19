@@ -78,21 +78,22 @@ class SelectableButton(RecycleDataViewBehavior, Button):
 class Gerenciador(ScreenManager):
     def autenticarLogin(self,p,login,senha):
         
-        # p.dismiss()
-        # self.current = "telag"
-        print(login+senha)
-        cs = conn.cursor()
-        cs.execute("SELECT * FROM Login l WHERE  l.login LIKE \'" + str(login) + "\' AND l.senha like \'" + str(senha) + "\' ORDER BY l.id_login ASC")
-        senha_bd = cs.fetchall()        
+        p.dismiss()
+        self.current = "telag"
+        # print(login+senha)
+        # cs = conn.cursor()
+        # cs.execute("SELECT * FROM Login l WHERE  l.login LIKE \'" + str(login) + "\' AND l.senha like \'" + str(senha) + "\' ORDER BY l.id_login ASC")
+        # senha_bd = cs.fetchall()        
 
-        if len(senha_bd) > 0:
+        # if len(senha_bd) > 0:
 
-            print(senha_bd)
-            self.current = "telag"
-        else:
+        #     print(senha_bd)
+        #     self.current = "telag"
+        #     p.dismiss()
+        # else:
             
-            p.ids.usuario.text = ""
-            p.ids.senha.text = ""
+        #     p.ids.usuario.text = ""
+        #     p.ids.senha.text = ""
             
         
     pass
@@ -198,7 +199,7 @@ class TelaFuncExcluir(Screen):
         print(id_excluir)
         with conn:
           with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
-                cur.execute("DELETE FROM funcionario WHERE id_funcionario = %s",(id_excluir,))                
+                cur.execute("DELETE FROM funcionario WHERE id_funcionario = %s",(id_excluir))                
           conn.close
         pass
     pass
@@ -348,7 +349,9 @@ class ButtonActions(BoxLayout):
         try:
             with conn:
                 with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
-                    cur.execute("UPDATE cliente c SET deletado = true WHERE c.id_cliente = (%s)", (id))
+                    print(id)
+                    cur.execute("UPDATE cliente c SET deletado = true WHERE c.id_cliente =" + str(id))
+                    # cur.commit()
                     # cur.execute("SELECT * FROM calc_bol(1)")
             conn.close
             lt.ids.telaclilistar.get_users()

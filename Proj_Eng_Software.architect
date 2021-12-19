@@ -329,39 +329,39 @@
    </folder>
   </table>
   <relationships>
-   <relationship id="REL87" populated="true" UUID="9035fd70-69d8-408e-9408-2d33b52ee130" deferrability="7" deleteRule="3" fk-table-ref="TAB23" fkCardinality="7" identifying="false" name="Cliente_Cartao_Cliente_fk" physicalName="Cliente_Cartao_Cliente_fk" pk-table-ref="TAB1" pkCardinality="2" updateRule="3" >
+   <relationship id="REL87" populated="true" UUID="9035fd70-69d8-408e-9408-2d33b52ee130" deferrability="7" deleteRule="3" fk-table-ref="TAB23" fkCardinality="7" identifying="false" name="Cliente_Cartao_Cliente_fk" physicalName="cliente_cartao_cliente_fk" pk-table-ref="TAB1" pkCardinality="2" updateRule="3" >
     <column-mapping id="CMP88" populated="true" UUID="21e2a97e-6b74-4975-9e40-e0785828edf0" fk-column-ref="COL26" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL2" />
    </relationship>
-   <relationship id="REL89" populated="true" UUID="5e2069ff-0afb-4d34-a0a2-c99490efc590" deferrability="7" deleteRule="3" fk-table-ref="TAB29" fkCardinality="7" identifying="true" name="Cliente_Carro_Cliente_fk" physicalName="Cliente_Carro_Cliente_fk" pk-table-ref="TAB1" pkCardinality="2" updateRule="3" >
+   <relationship id="REL89" populated="true" UUID="5e2069ff-0afb-4d34-a0a2-c99490efc590" deferrability="7" deleteRule="3" fk-table-ref="TAB29" fkCardinality="7" identifying="true" name="Cliente_Carro_Cliente_fk" physicalName="cliente_carro_cliente_fk" pk-table-ref="TAB1" pkCardinality="2" updateRule="3" >
     <column-mapping id="CMP90" populated="true" UUID="3bd0f617-b755-4986-ab72-0f929e488331" fk-column-ref="COL31" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL2" />
    </relationship>
-   <relationship id="REL91" populated="true" UUID="20a3e8ec-2cb3-4d67-b73b-0dda39a25b80" deferrability="7" deleteRule="3" fk-table-ref="TAB1" fkCardinality="7" identifying="false" name="Tipo_Cliente_Cliente_fk" physicalName="Tipo_Cliente_Cliente_fk" pk-table-ref="TAB11" pkCardinality="2" updateRule="3" >
+   <relationship id="REL91" populated="true" UUID="20a3e8ec-2cb3-4d67-b73b-0dda39a25b80" deferrability="7" deleteRule="3" fk-table-ref="TAB1" fkCardinality="7" identifying="false" name="Tipo_Cliente_Cliente_fk" physicalName="tipo_cliente_cliente_fk" pk-table-ref="TAB11" pkCardinality="2" updateRule="3" >
     <column-mapping id="CMP92" populated="true" UUID="8e571bd3-0abc-492a-863c-70b6932cb1d8" fk-column-ref="COL3" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL12" />
    </relationship>
-   <relationship id="REL93" populated="true" UUID="812c61fe-0ee7-40a4-8ba5-27565485bd98" deferrability="7" deleteRule="3" fk-table-ref="TAB81" fkCardinality="7" identifying="true" name="Tipo_Cliente_Cliente_Vip_fk" physicalName="Tipo_Cliente_Cliente_Vip_fk" pk-table-ref="TAB11" pkCardinality="2" updateRule="3" >
+   <relationship id="REL93" populated="true" UUID="812c61fe-0ee7-40a4-8ba5-27565485bd98" deferrability="7" deleteRule="3" fk-table-ref="TAB81" fkCardinality="7" identifying="true" name="Tipo_Cliente_Cliente_Vip_fk" physicalName="tipo_cliente_cliente_vip_fk" pk-table-ref="TAB11" pkCardinality="2" updateRule="3" >
     <column-mapping id="CMP94" populated="true" UUID="abe3d425-532e-43a9-85dd-06310ad08191" fk-column-ref="COL83" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL12" />
    </relationship>
-   <relationship id="REL95" populated="true" UUID="71d78a1c-eff6-42f8-a3a2-f1ff56f4645a" deferrability="7" deleteRule="3" fk-table-ref="TAB23" fkCardinality="7" identifying="false" name="Cartao_Cartao_Cliente_fk" physicalName="Cartao_Cartao_Cliente_fk" pk-table-ref="TAB17" pkCardinality="2" updateRule="3" >
+   <relationship id="REL95" populated="true" UUID="71d78a1c-eff6-42f8-a3a2-f1ff56f4645a" deferrability="7" deleteRule="3" fk-table-ref="TAB23" fkCardinality="7" identifying="false" name="Cartao_Cartao_Cliente_fk" physicalName="cartao_cartao_cliente_fk" pk-table-ref="TAB17" pkCardinality="2" updateRule="3" >
     <column-mapping id="CMP96" populated="true" UUID="cdbaf999-451a-403c-8d30-69b72841c6c7" fk-column-ref="COL25" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL18" />
    </relationship>
-   <relationship id="REL97" populated="true" UUID="43daae9a-4484-48c7-8963-35c2fee8da89" deferrability="7" deleteRule="3" fk-table-ref="TAB49" fkCardinality="7" identifying="true" name="Carro_Cliente_Vaga_Cliente_fk" physicalName="Carro_Cliente_Vaga_Cliente_fk" pk-table-ref="TAB29" pkCardinality="2" updateRule="3" >
+   <relationship id="REL97" populated="true" UUID="43daae9a-4484-48c7-8963-35c2fee8da89" deferrability="7" deleteRule="3" fk-table-ref="TAB49" fkCardinality="7" identifying="true" name="Carro_Cliente_Vaga_Cliente_fk" physicalName="carro_cliente_vaga_cliente_fk" pk-table-ref="TAB29" pkCardinality="2" updateRule="3" >
     <column-mapping id="CMP98" populated="true" UUID="4a3a8d33-ea7b-4059-a9c1-dac06e7a6c70" fk-column-ref="COL51" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL30" />
    </relationship>
-   <relationship id="REL99" populated="true" UUID="15b29f56-a3a8-48ff-a002-3f26e0aa4392" deferrability="7" deleteRule="3" fk-table-ref="TAB29" fkCardinality="7" identifying="true" name="Carro_Carro_Cliente_fk" physicalName="Carro_Carro_Cliente_fk" pk-table-ref="TAB35" pkCardinality="2" updateRule="3" >
+   <relationship id="REL99" populated="true" UUID="15b29f56-a3a8-48ff-a002-3f26e0aa4392" deferrability="7" deleteRule="3" fk-table-ref="TAB29" fkCardinality="7" identifying="true" name="Carro_Carro_Cliente_fk" physicalName="carro_carro_cliente_fk" pk-table-ref="TAB35" pkCardinality="2" updateRule="3" >
     <column-mapping id="CMP100" populated="true" UUID="2b68697a-6854-42b7-9c3d-9b3d15e046a5" fk-column-ref="COL32" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL36" />
    </relationship>
-   <relationship id="REL101" populated="true" UUID="b1f5a653-bec0-49c8-bf09-1a1270a3f3ec" deferrability="7" deleteRule="3" fk-table-ref="TAB49" fkCardinality="7" identifying="true" name="Vaga_Vaga_Cliente_fk" physicalName="Vaga_Vaga_Cliente_fk" pk-table-ref="TAB42" pkCardinality="2" updateRule="3" >
+   <relationship id="REL101" populated="true" UUID="b1f5a653-bec0-49c8-bf09-1a1270a3f3ec" deferrability="7" deleteRule="3" fk-table-ref="TAB49" fkCardinality="7" identifying="true" name="Vaga_Vaga_Cliente_fk" physicalName="vaga_vaga_cliente_fk" pk-table-ref="TAB42" pkCardinality="2" updateRule="3" >
     <column-mapping id="CMP102" populated="true" UUID="f804c4bd-aa9a-4472-af98-d9fede7fd6a7" fk-column-ref="COL52" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL43" />
    </relationship>
-   <relationship id="REL103" populated="true" UUID="6629e5ea-7d27-4460-92e3-3b67a3add2f0" deferrability="7" deleteRule="3" fk-table-ref="TAB58" fkCardinality="7" identifying="true" name="Vaga_Cliente_Pagamento_fk" physicalName="Vaga_Cliente_Pagamento_fk" pk-table-ref="TAB49" pkCardinality="2" updateRule="3" >
+   <relationship id="REL103" populated="true" UUID="6629e5ea-7d27-4460-92e3-3b67a3add2f0" deferrability="7" deleteRule="3" fk-table-ref="TAB58" fkCardinality="7" identifying="true" name="Vaga_Cliente_Pagamento_fk" physicalName="vaga_cliente_pagamento_fk" pk-table-ref="TAB49" pkCardinality="2" updateRule="3" >
     <column-mapping id="CMP104" populated="true" UUID="fee67a38-0094-48c6-939b-40a22da2212a" fk-column-ref="COL60" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL50" />
    </relationship>
-   <relationship id="REL105" populated="true" UUID="98cf6eb4-153d-470e-8671-92aa3667f59b" deferrability="7" deleteRule="3" fk-table-ref="TAB65" fkCardinality="7" identifying="true" name="Funcionario_Login_fk" physicalName="Funcionario_Login_fk" pk-table-ref="TAB72" pkCardinality="2" updateRule="3" >
+   <relationship id="REL105" populated="true" UUID="98cf6eb4-153d-470e-8671-92aa3667f59b" deferrability="7" deleteRule="3" fk-table-ref="TAB65" fkCardinality="7" identifying="true" name="Funcionario_Login_fk" physicalName="funcionario_login_fk" pk-table-ref="TAB72" pkCardinality="2" updateRule="3" >
     <column-mapping id="CMP106" populated="true" UUID="4b0c97f1-8d40-477b-9b74-b98c5015239a" fk-column-ref="COL67" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL73" />
    </relationship>
   </relationships>
  </target-database>
- <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="true" target-schema="public"> </ddl-generator>
+ <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="false" target-schema="public"> </ddl-generator>
  <liquibase-settings useSeparateChangeSets="false" generateId="false" idStart="1"/>
  <create-kettle-job-settings filePath="" jobName="" schemaName="" kettleJoinType="0" savingToFile="true" />
  <play-pen zoom="0.7071067811865471" viewportX="0" viewportY="0" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
