@@ -47,49 +47,6 @@
         LoginButton:
             text: "Cancelar"
             on_release: root.dismiss()
-# <GerarValor@popup>
-#     auto_dismiss: False
-#     size_hint: 0.6, 0.7
-#     pos_hint: {'x': 0.2,'center_y': 0.4}
-#     title: "Ticket"
-#     id: valor_pop
-#         GridLayout:
-#             cols: 2
-#             size: root.width, root.height
-#             Label:
-#                 text: "Número da Vaga:"
-#                 font_size:20
-#             Label:
-#                 text: ""
-#                 font_size:20
-#             Label:
-#                 text:"Tipo de Cliente:"
-#                 font_size:20
-#             Label:
-#                 text: ""
-#                 font_size:20
-#             Label:
-#                 text: "Hora de Entrada:"
-#                 font_size:20
-#             Label:
-#                 text: ""
-#                 font_size:20
-#             Label:
-#                 text:"Hora de Saida:"
-#                 font_size:20
-#             Label:
-#                 text: ""
-#                 font_size:20
-#             Label:
-#                 text:"Valor a ser Pago:"
-#                 font_size:20
-#             Label:
-#                 text: ""
-#                 font_size:20
-#         Button:
-#             text: "OK"
-#             on_release: root.dismiss()
-
 
 
 <PopupSucesso@Popup>
@@ -119,6 +76,8 @@
         text: "Confirmar"
         font_size: 15
         on_release: root.dismiss()
+
+
 
 <PopupBoleto>:
     title: "Boleto"
@@ -353,7 +312,11 @@
             pos:self.pos
             size: self.size
     GridLayout:
-        rows: 2
+        rows: 4
+        Label:
+            text: "Funcionarios"
+            color: 'black'
+            font_size: 30
         GridLayout:
             cols: 2
             padding: 0
@@ -375,7 +338,19 @@
                     source: "Imagens/list-status.png"
                     center_x: self.parent.center_x
                     center_y: self.parent.center_y 
-                    allow_stretch: True        
+                    allow_stretch: True
+        GridLayout:
+            cols: 2
+            padding: 0
+            spacing: 0
+            Label:
+                text: 'Cadastro'
+                color: 'black'
+                font_size: 20
+            Label:
+                text: 'Listar'  
+                color: 'black'
+                font_size: 20              
         GridLayout:
             cols: 3
             padding: 50
@@ -589,7 +564,11 @@
             pos:self.pos
             size: self.size
     GridLayout:
-        rows: 2
+        rows: 4
+        Label:
+            text: "Clientes"
+            color: 'black'
+            font_size: 30
         GridLayout:
             cols: 2
             padding: 0
@@ -612,7 +591,18 @@
                     center_x: self.parent.center_x
                     center_y: self.parent.center_y
                     allow_stretch: True
-                
+        GridLayout:
+            cols: 2
+            padding: 0
+            spacing: 0
+            Label:
+                text: 'Cadastro'
+                color: 'black'
+                font_size: 20
+            Label:
+                text: 'Listar'  
+                color: 'black'
+                font_size: 20
         GridLayout:
             cols: 3
             padding: 50
@@ -685,7 +675,6 @@
             text: "Confirmar"
             background_color: 0,0,0,0
             on_press: root.enviarBDcli()
-            on_release: Factory.PopupSucesso().open()
             Image:
                 source: "Imagens/check.png"
                 center_x: self.parent.center_x

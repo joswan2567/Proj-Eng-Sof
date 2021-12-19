@@ -78,22 +78,22 @@ class SelectableButton(RecycleDataViewBehavior, Button):
 class Gerenciador(ScreenManager):
     def autenticarLogin(self,p,login,senha):
         
-        p.dismiss()
-        self.current = "telag"
-        # print(login+senha)
-        # cs = conn.cursor()
-        # cs.execute("SELECT * FROM Login l WHERE  l.login LIKE \'" + str(login) + "\' AND l.senha like \'" + str(senha) + "\' ORDER BY l.id_login ASC")
-        # senha_bd = cs.fetchall()        
+        # p.dismiss()
+        # self.current = "telag"
+        print(login+senha)
+        cs = conn.cursor()
+        cs.execute("SELECT * FROM Login l WHERE  l.login LIKE \'" + str(login) + "\' AND l.senha like \'" + str(senha) + "\' ORDER BY l.id_login ASC")
+        senha_bd = cs.fetchall()        
 
-        # if len(senha_bd) > 0:
+        if len(senha_bd) > 0:
 
-        #     print(senha_bd)
-        #     self.current = "telag"
-        #     p.dismiss()
-        # else:
+            print(senha_bd)
+            self.current = "telag"
+            p.dismiss()
+        else:
             
-        #     p.ids.usuario.text = ""
-        #     p.ids.senha.text = ""
+            p.ids.usuario.text = ""
+            p.ids.senha.text = ""
             
         
     pass
@@ -124,6 +124,7 @@ class PopupBoleto(Popup):
         self.entrada = str(obj[2])
         self.saida = str(obj[3])
         self.total = str(obj[4])
+
 class TelaPagamento(Screen):
 
     dt_it = []
@@ -172,7 +173,6 @@ class TelaPagamento(Screen):
 
         # except:
         #     print('Error Req')
-
 
 class TelaFuncCadastro(Screen):
     def enviarBD(self):
@@ -235,6 +235,7 @@ class TelaFuncListar(Screen):
 
 class TelaCli(Screen):
     pass
+
 class TelaCliCadastro(Screen):
     def enviarBDcli(self):
         print("funcao enviarBDcliente")
@@ -244,13 +245,16 @@ class TelaCliCadastro(Screen):
         cpf_inserir= self.cpf_inserir.text
         tipo_inserir= 1 if self.tipo_inserir.text == "Normal" else 2
         print(nome_inserir + telefone_inserir + email_inserir + cpf_inserir)
-        if nome_inserir != "":   
+        if ((nome_inserir != "") and (telefone_inserir != "") and (email_inserir != "") and (cpf_inserir != "") and (tipo_inserir != "")):   
             with conn:
                 with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
                     cur.execute("INSERT INTO public.cliente (nome,telefone,email,cpf,id_tipo_cliente) VALUES (%s,%s,%s,%s,%s)",(nome_inserir,telefone_inserir,email_inserir,cpf_inserir,tipo_inserir) )
                 conn.close
-        pass
+            
+        else:
+            print("Campo Invalido!")
     pass
+
 class TelaCliExcluir(Screen):
     def deletarBDcli(self):
         id_excluir = self.id_excluir.text
@@ -262,6 +266,7 @@ class TelaCliExcluir(Screen):
         pass
     pass
     pass
+
 class TelaCliListar(Screen):
     data_items = ListProperty([])
 
@@ -291,6 +296,7 @@ class TelaCliListar(Screen):
     def build(self):
         pass    
     pass
+
 class TextInputPopup(Popup):
     obj = ObjectProperty(None)
     id = StringProperty("")
@@ -380,7 +386,6 @@ class ButtonActionsFunc(BoxLayout):
         lt.get_users()
         lt.ids.lt.refresh_from_data()
         lt.ids.bt_act.refresh_from_data()
-
 
 class principalApp(App): 
     def build(self):
