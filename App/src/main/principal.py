@@ -349,6 +349,9 @@ class TextInputPopup(Popup):
         self.email = str(obj.data[5])
     
     def save(self, lt):
+        if (self.obj == "" or self.id == "" or self.id_cliente == "" or self.nome == "" or self.telefone == "" or self.cpf == "" or self.email == ""):
+            self.dismiss()
+            return 
         try:
             with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
                 print(self.id)
