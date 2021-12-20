@@ -267,15 +267,16 @@ class TelaCliCadastro(Screen):
                 print("Erro no Banco :" + str(e))
                 log = PopupAviso("Campos Inválidos")
                 log.open()
-            
-            l = PopupAviso("Successo!!")
-            l.open()
-            
-            self.telefone_inserir.text = "" 
-            self.nome_inserir.text = ""
-            self.email_inserir.text = ""
-            self.cpf_inserir.text = ""
-            self.tipo_inserir.text = "Selecione"
+                
+            finally:
+                l = PopupAviso("Successo!!")
+                l.open()
+                
+                self.telefone_inserir.text = "" 
+                self.nome_inserir.text = ""
+                self.email_inserir.text = ""
+                self.cpf_inserir.text = ""
+                self.tipo_inserir.text = "Selecione"
             
                     
         else:
