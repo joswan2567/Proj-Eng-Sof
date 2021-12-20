@@ -267,8 +267,8 @@ class TelaCliCadastro(Screen):
                 print("Erro no Banco :" + str(e))
                 log = PopupAviso("Campos Inválidos")
                 log.open()
-                
-            finally:
+
+            else:
                 l = PopupAviso("Successo!!")
                 l.open()
                 
