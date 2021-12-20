@@ -78,26 +78,24 @@ class SelectableButton(RecycleDataViewBehavior, Button):
 class Gerenciador(ScreenManager):
     def autenticarLogin(self,p,login,senha):
         
-        # p.dismiss()
-        # self.current = "telag"
-        print(login+senha)
-        cs = conn.cursor()
-        cs.execute("SELECT * FROM Login l WHERE  l.login LIKE \'" + str(login) + "\' AND l.senha like \'" + str(senha) + "\' ORDER BY l.id_login ASC")
-        senha_bd = cs.fetchall()        
+        p.dismiss()
+        self.current = "telag"
+        # print(login+senha)
+        # cs = conn.cursor()
+        # cs.execute("SELECT * FROM Login l WHERE  l.login LIKE \'" + str(login) + "\' AND l.senha like \'" + str(senha) + "\' ORDER BY l.id_login ASC")
+        # senha_bd = cs.fetchall()        
 
-        if len(senha_bd) > 0:
+        # if len(senha_bd) > 0:
 
-            print(senha_bd)
-            self.current = "telag"
-            p.dismiss()
-        else:
+        #     print(senha_bd)
+        #     self.current = "telag"
+        #     p.dismiss()
+        # else:
             
-            p.ids.usuario.text = ""
-            p.ids.senha.text = ""
+        #     p.ids.usuario.text = ""
+        #     p.ids.senha.text = ""
             
         
-    pass
-
 class TelaPrincipal(Screen): 
     pass
 
@@ -174,6 +172,15 @@ class TelaPagamento(Screen):
         # except:
         #     print('Error Req')
 
+
+
+class PopupAviso(Popup):
+    aviso = StringProperty("")
+    def __init__(self, txt, **kwargs):
+        super(PopupAviso, self).__init__(**kwargs)
+        self.aviso = txt
+        # print("chamou o pp")
+
 class TelaFuncCadastro(Screen):
     def enviarBD(self):
         nome_inserir = self.nome_inserir.text
@@ -184,13 +191,18 @@ class TelaFuncCadastro(Screen):
         # acesso_inserir =  self.checkbox.text
         # print(nome_inserir + telefone_inserir + email_inserir + funcao_inserir + turno_inserir+acesso_inserir)
         print(nome_inserir + telefone_inserir + email_inserir + funcao_inserir + turno_inserir)
-        with conn:
-            with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
-                # cur.execute("INSERT INTO funcionario (nome,telefone,funcao,turno,email,acesso) VALUES (%s,%s,%s,%s,%s,%s)",(nome_inserir,telefone_inserir,funcao_inserir,turno_inserir,email_inserir,acesso_inserir) )
-                cur.execute("INSERT INTO funcionario (nome,telefone,funcao,turno,email,acesso) VALUES (%s,%s,%s,%s,%s)",(nome_inserir,telefone_inserir,funcao_inserir,turno_inserir,email_inserir) )
-
-            conn.close
-        pass
+        try:
+            with conn:
+                with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
+                    # cur.execute("INSERT INTO funcionario (nome,telefone,funcao,turno,email,acesso) VALUES (%s,%s,%s,%s,%s,%s)",(nome_inserir,telefone_inserir,funcao_inserir,turno_inserir,email_inserir,acesso_inserir) )
+                    cur.execute("INSERT INTO funcionario (nome,telefone,funcao,turno,email,acesso) VALUES (%s,%s,%s,%s,%s)",(nome_inserir,telefone_inserir,funcao_inserir,turno_inserir,email_inserir) )
+                conn.close
+                log = PopupAviso("Sucesso!")
+                log.open()
+        except psycopg2.Error as e:
+            print(e)
+            log = PopupAviso(e)
+            log.open()
     pass
 
 class TelaFuncExcluir(Screen):
@@ -238,21 +250,39 @@ class TelaCli(Screen):
 
 class TelaCliCadastro(Screen):
     def enviarBDcli(self):
-        print("funcao enviarBDcliente")
+        # print("funcao enviarBDcliente")
         nome_inserir = self.nome_inserir.text
         telefone_inserir= self.telefone_inserir.text
         email_inserir= self.email_inserir.text
         cpf_inserir= self.cpf_inserir.text
         tipo_inserir= 1 if self.tipo_inserir.text == "Normal" else 2
-        print(nome_inserir + telefone_inserir + email_inserir + cpf_inserir)
+        # print(nome_inserir + telefone_inserir + email_inserir + cpf_inserir)
         if ((nome_inserir != "") and (telefone_inserir != "") and (email_inserir != "") and (cpf_inserir != "") and (tipo_inserir != "")):   
-            with conn:
-                with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
-                    cur.execute("INSERT INTO public.cliente (nome,telefone,email,cpf,id_tipo_cliente) VALUES (%s,%s,%s,%s,%s)",(nome_inserir,telefone_inserir,email_inserir,cpf_inserir,tipo_inserir) )
-                conn.close
+            try:
+                with conn:
+                    with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
+                        cur.execute("INSERT INTO public.cliente (nome,telefone,email,cpf,id_tipo_cliente) VALUES (%s,%s,%s,%s,%s)",(nome_inserir,telefone_inserir,email_inserir,cpf_inserir,tipo_inserir) )
+                    conn.close
+            except psycopg2.Error as e:
+                print("Erro no Banco :" + str(e))
+                log = PopupAviso("Campos Inválidos")
+                log.open()
             
+            l = PopupAviso("Successo!!")
+            l.open()
+            
+            self.telefone_inserir.text = "" 
+            self.nome_inserir.text = ""
+            self.email_inserir.text = ""
+            self.cpf_inserir.text = ""
+            self.tipo_inserir.text = "Selecione"
+            
+                    
         else:
-            print("Campo Invalido!")
+            log = PopupAviso("Preencha todos os Campos!")
+            log.open()
+            # print("Campo Invalido!")
+        
     pass
 
 class TelaCliExcluir(Screen):

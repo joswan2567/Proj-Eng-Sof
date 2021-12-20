@@ -49,33 +49,39 @@
             on_release: root.dismiss()
 
 
-<PopupSucesso@Popup>
-    auto_dismiss: True
-    size_hint: 0.6, 0.2
-    pos_hint: {"x": 0.2,"center": 0.5}
-    title: "Adicionado com sucesso!"
-    Button:
-        text: "Confirmar"
-        font_size: 15
-        on_release: root.dismiss()
-<PopupSucesso2@Popup>
-    auto_dismiss: True
-    size_hint: 0.6, 0.2
-    pos_hint: {"x": 0.2,"center": 0.5}
-    title: "Removido com sucesso!"
-    Button:
-        text: "Confirmar"
-        font_size: 15
-        on_release: root.dismiss()
-<PopupSucesso3@Popup>
-    auto_dismiss: True
-    size_hint: 0.6, 0.2
-    pos_hint: {"x": 0.2,"center": 0.5}
-    title: "Atualizado com sucesso!"
-    Button:
-        text: "Confirmar"
-        font_size: 15
-        on_release: root.dismiss()
+<PopupAviso>
+    size_hint: None, None
+    size: 300, 500
+    auto_dismiss: False
+    title: ""
+    BoxLayout:
+        orientation:'vertical'
+        Label:
+            text: str(root.aviso)
+            color:
+        Button:
+            text: "Uai Sô Paãozin de queijin"
+            font_size: 15
+            on_release: root.dismiss()
+
+# <PopupSucesso2@Popup>
+#     auto_dismiss: True
+#     size_hint: 0.6, 0.2
+#     pos_hint: {"x": 0.2,"center": 0.5}
+#     title: "Removido com sucesso!"
+#     Button:
+#         text: "Confirmar"
+#         font_size: 15
+#         on_release: root.dismiss()
+# <PopupSucesso3@Popup>
+#     auto_dismiss: True
+#     size_hint: 0.6, 0.2
+#     pos_hint: {"x": 0.2,"center": 0.5}
+#     title: "Atualizado com sucesso!"
+#     Button:
+#         text: "Confirmar"
+#         font_size: 15
+#         on_release: root.dismiss()
 
 
 
