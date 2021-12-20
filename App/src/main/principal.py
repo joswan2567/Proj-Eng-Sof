@@ -24,6 +24,7 @@ from kivy.uix.popup import Popup
 
 
 dt_items=[]
+dt_itemsFunc=[]
 
 class SelectableRecycleGridLayout(FocusBehavior, LayoutSelectionBehavior,
                                   RecycleGridLayout):
@@ -188,21 +189,28 @@ class TelaFuncCadastro(Screen):
         email_inserir= self.email_inserir.text
         funcao_inserir= self.funcao_inserir.text
         turno_inserir= self.turno_inserir.text
-        # acesso_inserir =  self.checkbox.text
-        # print(nome_inserir + telefone_inserir + email_inserir + funcao_inserir + turno_inserir+acesso_inserir)
-        print(nome_inserir + telefone_inserir + email_inserir + funcao_inserir + turno_inserir)
+        acesso_inserir =  str(self.acesso_inserir.active)
+        print(nome_inserir + telefone_inserir + email_inserir + funcao_inserir + turno_inserir+" "+ acesso_inserir)
+        # print(nome_inserir + telefone_inserir + email_inserir + funcao_inserir + turno_inserir)
         try:
             with conn:
                 with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
                     # cur.execute("INSERT INTO funcionario (nome,telefone,funcao,turno,email,acesso) VALUES (%s,%s,%s,%s,%s,%s)",(nome_inserir,telefone_inserir,funcao_inserir,turno_inserir,email_inserir,acesso_inserir) )
-                    cur.execute("INSERT INTO funcionario (nome,telefone,funcao,turno,email,acesso) VALUES (%s,%s,%s,%s,%s)",(nome_inserir,telefone_inserir,funcao_inserir,turno_inserir,email_inserir) )
+                    cur.execute("INSERT INTO funcionario (nome,telefone,funcao,turno,email,acesso) VALUES (%s,%s,%s,%s,%s,%s)",(nome_inserir,telefone_inserir,funcao_inserir,turno_inserir,email_inserir,acesso_inserir) )
                 conn.close
-                log = PopupAviso("Sucesso!")
-                log.open()
         except psycopg2.Error as e:
             print(e)
-            log = PopupAviso(e)
+            log = PopupAviso(str(e))
+        else:
+            log = PopupAviso("Sucesso!")
             log.open()
+            self.nome_inserir.text = ""
+            self.telefone_inserir.text = ""
+            self.email_inserir.text = ""
+            self.funcao_inserir.text = ""
+            self.turno_inserir.text = ""
+            self.acesso_inserir.active = False
+
     pass
 
 class TelaFuncExcluir(Screen):
@@ -225,17 +233,20 @@ class TelaFuncListar(Screen):
         pass
 
     def get_users(self):
+        dt_itemsFunc.clear()
+
         connection = conn
         cursor = connection.cursor()
 
-        cursor.execute("SELECT * FROM public.funcionario ORDER BY id_funcionario ASC")
+        cursor.execute("SELECT c.id_funcionario, c.nome, c.telefone, c.funcao, c.turno, c.email, c.acesso FROM public.funcionario c WHERE c.deletado = false ORDER BY id_funcionario ASC")
         rows = cursor.fetchall()
         print(rows)
         for row in rows:
             for col in row:
-                self.data_items.append(col)
-            self.data_items.append("Editar")
+                dt_itemsFunc.append(col)
+            # dt_itemsFunc.append("Editar")
         pass
+        self.data_items = dt_itemsFunc
 
     def cd(self):  
         self.clear_widgets()
@@ -376,7 +387,66 @@ class TextInputPopup(Popup):
             print('Error banco :' + str(e))
         # print(lt)
         self.dismiss()
+
+
+class TextInputPopupFunc(Popup):
+    obj = ObjectProperty(None)
+    id_func = StringProperty("")
+    nome = StringProperty("")
+    telefone = StringProperty("")
+    funcao = StringProperty("")
+    turno = StringProperty("")
+    email = StringProperty("")
+    acesso = StringProperty("")
+
+    def __init__(self, obj, **kwargs):
+        super(TextInputPopupFunc, self).__init__(**kwargs)
+        print(obj.data)
+        self.obj = obj
+        self.id_func = str(obj.data[0])
+        self.nome = str(obj.data[1])
+        self.telefone = str(obj.data[2])
+        self.funcao = str(obj.data[3])
+        self.turno = str(obj.data[4])
+        self.email = str(obj.data[5])
+        self.acesso = str(obj.data[6])
+    
+    def save(self, lt):
+        if (self.obj == "" or self.id_func == "" or self.nome == "" or self.telefone == "" or  self.turno == ""  or self.funcao == "" or self.email == ""  or self.acesso == ""):
+            self.dismiss()
+            lg = PopupAviso("Tá trolando?")
+            lg.open()
+            return 
+        try:
+            with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
+                print(self.id_func)
+                print(self.nome)
+                print(self.telefone)
+                print(self.funcao)
+                print(self.turno)
+                print(self.email)
+                print(self.acesso)
+                cur.execute(
+                    "UPDATE funcionario c " 
+                    "SET (nome,telefone,funcao,turno,email,acesso) = (%s,%s,%s,%s,%s,%s) " 
+                    "WHERE c.id_funcionario = %s", 
+                    (self.nome, self.telefone, self.funcao, self.turno, self.email, self.acesso, self.id_func));
+                conn.commit()
+            conn.close
+            lt.get_users()
+            lt.ids.lt_funcionario.refresh_from_data()
+            lt.ids.bt_act_funcionario.refresh_from_data()
+        except psycopg2.Error as e:
+            print('Error banco :' + str(e))
+            lg = PopupAviso('Error banco :' + str(e))
+        else:
+            lg = PopupAviso("Sucesso !")
+            lg.open()
+
+        # print(lt)
+        self.dismiss()
   
+
 class ButtonActions(BoxLayout):
     data = []
     def edit(self, init):
@@ -403,25 +473,43 @@ class ButtonActions(BoxLayout):
             lt.ids.telaclilistar.ids.bt_act_cliente.refresh_from_data()
         except psycopg2.Error as e:
             print('Erro banco: ' + str(e))
+            l = PopupAviso('Erro banco: ' + str(e))
+            l.open()
+        else:
+            l = PopupAviso("Deletado man!")
+            l.open()
   
 class ButtonActionsFunc(BoxLayout):
     data = []
     def edit(self, init):
-        self.data = list(dt_items[init:init+6])
-        popup = TextInputPopup(self)
+        self.data = list(dt_itemsFunc[init:init+7])
+        popup = TextInputPopupFunc(self)
         popup.open()
 
     def delete(self, lt):
-        print(self.id+1)
-        id = str(self.id+1)
-        # with conn:
-        #     with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
-        #         # cur.execute("DELETE FROM cliente WHERE id_cliente = %s", (id))
-        #         # cur.execute("SELECT * FROM calc_bol(1)")
-        # conn.close
-        lt.get_users()
-        lt.ids.lt.refresh_from_data()
-        lt.ids.bt_act.refresh_from_data()
+        id = str(lt.ids.telafunclista.data_items[self.id * 7])
+        print(id)
+        print(lt.ids.telafunclista.data_items)
+        try:
+            with conn:
+                with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
+                    print(id)
+                    cur.execute("UPDATE funcionario c SET deletado = true WHERE c.id_funcionario =" + str(id))
+                    # cur.commit()
+                    # cur.execute("SELECT * FROM calc_bol(1)")
+            conn.close
+            lt.ids.telafunclista.get_users()
+            print(lt)
+            print(lt.ids.telafunclista.ids)
+            lt.ids.telafunclista.ids.lt_funcionario.refresh_from_data()
+            lt.ids.telafunclista.ids.bt_act_funcionario.refresh_from_data()
+        except psycopg2.Error as e:
+            print('Erro banco: ' + str(e))
+            l = PopupAviso('Erro banco: ' + str(e))
+            l.open()
+        else:
+            l = PopupAviso("Deletado man!")
+            l.open()
 
 class principalApp(App): 
     def build(self):

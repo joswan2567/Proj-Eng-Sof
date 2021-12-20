@@ -202,6 +202,80 @@
                 on_release: root.dismiss()
 
 
+<TextInputPopupFunc>:
+    title: "Editar"
+    size_hint: None, None
+    size: 300, 500
+    auto_dismiss: False
+
+    BoxLayout:
+        orientation: "vertical"
+        BoxLayout:
+            orientation:'horizontal'
+            Label:
+                text: "ID"
+                color:
+            Label:
+                text: str(root.id_func)
+                color:
+        Label:
+            text: "Nome"
+            color:
+        TextInput:
+            id: nomefunc
+            text: root.nome
+        Label:
+            text: "Telefone"
+            color:
+        TextInput:
+            id: telefonefunc
+            text: root.telefone
+        Label:
+            text: "Funcao"
+            color:
+        TextInput:
+            id: funcao
+            text: root.funcao
+        Label:
+            text: "Turno"
+            color:
+        TextInput:
+            id: turno
+            text: root.turno        
+        Label:
+            text: "Email"
+            color:
+        TextInput:
+            id: emailfunc
+            text: root.email        
+        Label:
+            text: "Acesso"
+            color:
+        TextInput:
+            id: acesso
+            text: root.acesso        
+        BoxLayout:
+            orientation:'horizontal'
+            Button:
+                size_hint: 1, 1
+                text: "Salvar"
+                on_release:
+                    root.nome = nomefunc.text
+                    root.telefone = telefonefunc.text
+                    root.funcao = funcao.text
+                    root.email = emailfunc.text
+                    root.turno = turno.text
+                    root.acesso = acesso.text
+                    # print(app.root.ids)
+                    root.save(app.root.ids.telafunclista)
+                    root.dismiss()
+            Button:
+                size_hint: 1, 1
+                text: "Cancelar"
+                on_release: root.dismiss()
+
+
+
 <Gerenciador>
     TelaPrincipal:
         name: "telaPrincipal"
@@ -217,6 +291,7 @@
     TelaFuncCadastro:
         name: "telafuncadas"
     TelaFuncListar:
+        id: telafunclista
         name: "telafunclista"
     TelaGerenciamento:
         name: "telag"
@@ -438,7 +513,7 @@
             text: "Confirmar"
             background_color: 0,0,0,0
             on_press: root.enviarBD()
-            on_release: Factory.PopupSucesso().open()
+            # on_release: Factory.PopupSucesso().open()
             Image:
                 source: "Imagens/check.png"
                 center_x: self.parent.center_x
@@ -463,7 +538,7 @@
                 size_hint: 1, None
                 size_hint_y: None
                 height: 25
-                cols:8
+                cols:7
                 Label:
                     text: "ID"
                     color: "black"
@@ -492,7 +567,7 @@
                     viewclass: 'SelectableButton'
                     data: [{'text': str(x)} for x in root.data_items]
                     SelectableRecycleGridLayout:
-                        cols:8
+                        cols:7
                         default_size: None, dp(26)
                         default_size_hint: 1, None
                         size_hint_y: None
@@ -517,7 +592,7 @@
             RecycleView:
                 id: bt_act_funcionario
                 viewclass: 'ButtonActionsFunc'
-                data: [{'id': x } for x in range(int(len(root.data_items)/6))]
+                data: [{'id': x } for x in range(int(len(root.data_items)/7))]
                 SelectableRecycleGridLayout:
                     cols: 1
                     default_size: None, dp(26)
@@ -542,7 +617,7 @@
         color:
         on_press: 
             # print(f'dados: ${app.root.data_items[root.id*6:(root.id*6)+6]} id:${root.id}')
-            root.edit(root.id*6)
+            root.edit(root.id*7)
         Image:
             source: "Imagens/editar.png"
             center_x: self.parent.center_x
@@ -554,7 +629,7 @@
         color:
         on_press: 
             # print(f'dados: ${app.root.data_items[root.id*6:(root.id*6)+6]} id:${root.id}')
-            root.delete(root.id)
+            root.delete(app.root)
 
         Image:
             source: "Imagens/delete.png"
